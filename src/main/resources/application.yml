@@ -1,0 +1,42 @@
+server:
+  port: 8089
+  compression:
+    enabled: true
+    mime-types: application/json,application/xml,text/html,text/xml,text/plain
+
+
+mybatis:
+  config-location: classpath:mybatis/mybatis-config.xml
+  mapper-locations: classpath:mybatis/mapper/*.xml
+  type-aliases-package: com.example.model
+spring:
+  datasource:
+    url: jdbc:postgresql://172.18.137.233:5432/dppz?useSSL=false&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true&currentSchema=dppz #指定schema，postgreJDBC版本9.4之前用searchpath，9.4以上版本用currentSchema
+    userName: wiscom
+    password: wiscom@123
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      connection-test-query: SELECT 1
+    druid:
+      initial-size: 3
+      min-idle: 3
+      max-active: 10
+      max-wait: 60000
+      stat-view-servlet:
+        login-userName: admin
+        login-password: 1q2w3e4r!@
+      filter:
+        stat:
+          log-slow-sql: on
+          slow-sql-millis: 2000
+  redis:
+    database: 0
+    host: 172.19.139.247
+    port: 6379
+    password: redis123
+    lettuce:
+      pool:
+        max-active: 8
+        max-wait: -1
+        max-idle: 8
+        min-idle: 0

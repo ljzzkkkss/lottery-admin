@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wiscom.visual.server.mapper.UserMapper">
+    <select id="getUserByUserName" parameterType="String" resultType="com.wiscom.visual.server.bean.User">
+        SELECT "userName","password", "userState","displayName"
+        FROM "sys_user"
+        WHERE "userName" = #{userName}
+    </select>
+
+    <insert id="insertUser" parameterType="com.wiscom.visual.server.bean.SysUserBean" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO "sys_user"("userName","displayName","password","salt","userState","failCount","lastActive","createdBy","createdTime","updatedBy","updatedTime")
+        VALUES (#{userName},#{displayName},#{password},#{salt},#{userState},#{failCount},#{lastActive},#{createdBy},#{createdTime},#{updatedBy},#{updatedTime});
+    </insert>
+
+    <select id="checkUserName" parameterType="String" resultType="Long">
+        SELECT "id" FROM "sys_user" WHERE "userName" = #{userName};
+    </select>
+
+    <update id="updateUser" parameterType="com.wiscom.visual.server.bean.SysUserBean">
+        UPDATE "sys_user" SET
+        <if test="displayName != null and displayName != ''">"displayName" = #{displayName},</if>
+        <if test="password != null and password != ''">"password" = #{password},</if>
+        <if test="salt != null">"salt" = #{salt},</if>
+        <if test="userState != null">"userState" = #{userState},</if>
+        <if test="failCount != null">"failCount" = #{failCount},</if>
+        <if test="lastActive != null">"lastActive" = #{lastActive},</if>
+        "updatedBy" = #{updatedBy},
+        "updatedTime" = #{updatedTime}
+        WHERE "id" = #{id};
+    </update>
+
+    <delete id="deleteUser" parameterType="Long">
+        DELETE FROM "sys_user" WHERE "id" = #{id};
+    </delete>
+
+    <select id="getUserList" resultType="com.wiscom.visual.server.bean.SysUser">
+        SELECT u."id",u."userName",u."userState",u."displayName",u1."displayName" "createdBy",to_char(u."updatedTime",'YYYY-MM-DD HH24:MI:SS') "updatedTime",u2."displayName" "updatedBy",to_char(u."createdTime",'YYYY-MM-DD HH24:MI:SS') "createdTime"
+        FROM "sys_user" u LEFT JOIN "sys_user" u1 ON u."createdBy" = u1."userName"
+        LEFT JOIN "sys_user" u2 ON u."updatedBy" = u2."userName";
+    </select>
+
+
+    <select id="getAvailableUserList" resultType="com.wiscom.visual.server.bean.SysUser">
+        SELECT "id","displayName" FROM "sys_user" WHERE "userState" = 0;
+    </select>
+
+    <select id="getUserListByRoleId" resultType="Long">
+        SELECT u."id"
+        FROM "sys_user" u LEFT JOIN "sys_user_role" r ON u."id" = r."sys_user_id"
+        WHERE r."sys_role_id" = #{roleId} AND u."userState" = 0
+    </select>
+</mapper>
