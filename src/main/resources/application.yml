@@ -40,6 +40,16 @@ spring:
         max-wait: -1
         max-idle: 8
         min-idle: 0
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    cache: false
+  servlet:
+    multipart:
+      enabled:  true
+      file-size-threshold: 2KB
+      max-file-size: 10MB
+      max-request-size: 20MB
   session:
     store-type: redis
     timeout: 3600
