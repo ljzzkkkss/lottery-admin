@@ -53,12 +53,15 @@ CREATE TABLE `odd` (
 COMMENT = '赔率表';
 
 CREATE TABLE `optional` (
-  `id` INT NOT NULL AUTO_INCREMENT COMMENT '方案id',
-  `userId` INT NOT NULL COMMENT '用户id',
-  `lotteryImg` TEXT NULL COMMENT '彩票单图片',
-  `status` TINYINT NULL COMMENT '方案状态 0 未提交，1 提交，2 已投注',
-  PRIMARY KEY (`id`))
-COMMENT = '自选方案表';
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '方案id',
+  `userId` int(11) NOT NULL COMMENT '用户id',
+  `lotteryImg` text COMMENT '彩票单图片',
+  `status` tinyint(4) DEFAULT NULL COMMENT '方案状态 0 未提交，1 提交，2 已投注',
+  `optionDate` datetime DEFAULT NULL COMMENT '投注时间',
+  `name` varchar(45) DEFAULT NULL COMMENT '方案名称',
+  PRIMARY KEY (`id`)
+) COMMENT='自选方案表';
+
 
 CREATE TABLE `optional_detail` (
   `id` INT NOT NULL,
