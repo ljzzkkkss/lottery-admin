@@ -14,17 +14,19 @@ CREATE TABLE `user` (
 COMMENT = '用户表';
 
 CREATE TABLE `article` (
-  `id` INT NOT NULL AUTO_INCREMENT COMMENT '文章id',
-  `title` VARCHAR(100) NULL COMMENT '文章标题',
-  `subTitle` VARCHAR(45) NULL COMMENT '文章副标题（命中率等）',
-  `category` VARCHAR(45) NULL COMMENT '文章分类（赛事资讯等）',
-  `lable` VARCHAR(255) NULL COMMENT '文章标签',
-  `content` TEXT NULL COMMENT '文章内容',
-  `date` DATE NULL COMMENT '发表日期',
-  `isTop` TINYINT NULL COMMENT '是否置顶 0 否，1 是',
-  `status` TINYINT NULL COMMENT '文章状态 0 草稿，1 发表，2 下架',
-  PRIMARY KEY (`id`))
-COMMENT = '文章表';
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '文章id',
+  `title` varchar(100) DEFAULT NULL COMMENT '文章标题',
+  `subTitle` varchar(45) DEFAULT NULL COMMENT '文章副标题（命中率等）',
+  `category` varchar(45) DEFAULT NULL COMMENT '文章分类（赛事资讯等）',
+  `lable` varchar(255) DEFAULT NULL COMMENT '文章标签',
+  `content` text COMMENT '文章内容',
+  `date` date DEFAULT NULL COMMENT '发表日期',
+  `isTop` tinyint(4) DEFAULT NULL COMMENT '是否置顶 0 否，1 是',
+  `status` tinyint(4) DEFAULT NULL COMMENT '文章状态 0 草稿，1 发表，2 下架',
+  `image` varchar(255) DEFAULT NULL COMMENT '列表缩略图',
+  PRIMARY KEY (`id`)
+) COMMENT='文章表';
+
 
 CREATE TABLE `match` (
   `id` BIGINT NOT NULL COMMENT '赛事id',
