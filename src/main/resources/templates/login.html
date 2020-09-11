@@ -84,7 +84,8 @@
             },
             success: res => {
                 if(res.code === '0000'){
-                    window.location.href = '/shop'
+                    localStorage.setItem("ctx",res.data);
+                    window.location.href = '/article'
                 }else{
                     alert(res.message);
                 }
