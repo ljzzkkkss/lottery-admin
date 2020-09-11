@@ -56,19 +56,21 @@ CREATE TABLE `optional` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '方案id',
   `userId` int(11) NOT NULL COMMENT '用户id',
   `lotteryImg` text COMMENT '彩票单图片',
+  `cost` varchar(45) DEFAULT NULL COMMENT '投注金额',
+  `optionDate` datetime DEFAULT NULL COMMENT '投注日期',
+  `name` varchar(45) DEFAULT NULL COMMENT '投注名称',
   `status` tinyint(4) DEFAULT NULL COMMENT '方案状态 0 未提交，1 提交，2 已投注',
-  `optionDate` datetime DEFAULT NULL COMMENT '投注时间',
-  `name` varchar(45) DEFAULT NULL COMMENT '方案名称',
   PRIMARY KEY (`id`)
-) COMMENT='自选方案表';
-
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='自选方案表';
 
 CREATE TABLE `optional_detail` (
-  `id` INT NOT NULL,
-  `matchId` BIGINT NOT NULL,
-  `optionalId` INT NULL COMMENT '方案id',
-  `category` VARCHAR(45) NULL COMMENT '分类（非让球，主-1，比分 等）',
-  `rate` VARCHAR(45) NULL COMMENT '赔率',
-  `content` VARCHAR(45) NULL COMMENT '赔率内容（胜，负，0:1等）',
-  PRIMARY KEY (`id`))
-COMMENT = '自选方案详情表';
+  `id` int(11) NOT NULL,
+  `matchId` bigint(20) NOT NULL,
+  `optionalId` int(11) DEFAULT NULL COMMENT '方案id',
+  `category` varchar(45) DEFAULT NULL COMMENT '分类（非让球，主-1，比分 等）',
+  `rate` varchar(45) DEFAULT NULL COMMENT '赔率',
+  `content` varchar(45) DEFAULT NULL COMMENT '赔率内容（胜，负，0:1等）',
+  `times` int(11) DEFAULT NULL COMMENT '倍数',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='自选方案详情表';
+

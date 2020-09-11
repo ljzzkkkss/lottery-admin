@@ -5,6 +5,7 @@ import com.ljzzkkkss.lottery.admin.constants.ReturnType;
 import com.ljzzkkkss.lottery.admin.model.AdminUser;
 import com.ljzzkkkss.lottery.admin.model.ReturnBody;
 import com.ljzzkkkss.lottery.admin.service.AdminUserService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +20,8 @@ import javax.servlet.http.HttpServletRequest;
 public class IndexController {
     @Resource
     private AdminUserService adminUserService;
+    @Value("${file.url}")
+    private String fileUrl;
 
     @GetMapping("/login")
     public String login(){
@@ -36,7 +39,7 @@ public class IndexController {
             return ReturnType.LOGIN_ERROR;
         }
         request.getSession().setAttribute("user",user);
-        return ReturnType.SUCCESS;
+        return new ReturnBody(fileUrl);
     }
 
     @ResponseBody
