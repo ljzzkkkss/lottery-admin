@@ -6,7 +6,9 @@ import com.ljzzkkkss.lottery.admin.service.ArticleService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class ArticelServiceImpl implements ArticleService {
@@ -14,9 +16,14 @@ public class ArticelServiceImpl implements ArticleService {
     private ArticleMapper articleMapper;
 
     @Override
-    public List<Article> getArticleListByPage(Integer pageIndex, Integer pageSize) {
+    public Map<String, Object> getArticleListByPage(Integer pageIndex, Integer pageSize) {
         Integer start = pageSize * (pageIndex - 1);
-        return articleMapper.getArticleListByPage(start,pageSize);
+        List<Article> dataList = articleMapper.getArticleListByPage(start,pageSize);
+        Integer count = articleMapper.getArticleCount();
+        Map<String,Object> result = new HashMap<>();
+        result.put("data",dataList);
+        result.put("itemsCount",count);
+        return result;
     }
 
     @Override

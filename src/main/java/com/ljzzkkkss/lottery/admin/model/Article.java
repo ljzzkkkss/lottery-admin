@@ -13,7 +13,7 @@ public class Article implements Serializable {
     private String date;
     private Integer status;
     private Integer isTop;
-    private String lable;
+    private String label;
     private String category;
 
     public Integer getId() {
@@ -80,19 +80,19 @@ public class Article implements Serializable {
         this.isTop = isTop;
     }
 
-    public String getLable() {
-        return lable;
-    }
-
-    public void setLable(String lable) {
-        this.lable = lable;
-    }
-
     public String getCategory() {
         return category;
     }
 
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    public String getLabel() {
+        return label;
+    }
+
+    public void setLabel(String label) {
+        this.label = label;
     }
 }

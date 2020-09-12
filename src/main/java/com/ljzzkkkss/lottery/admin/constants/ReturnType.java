@@ -11,4 +11,5 @@ public class ReturnType {
     public static ReturnBody PARAM_LEAK = new ReturnBody("0202","缺少参数！");
     public static ReturnBody INVALID_PARAM = new ReturnBody("0203","非法参数！");
     public static ReturnBody NEED_LOGIN = new ReturnBody("0204","需要登陆！");
+    public static ReturnBody INVALID_FILE = new ReturnBody("0205","非法文件！");
 }

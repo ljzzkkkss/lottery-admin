@@ -3,7 +3,7 @@
 <mapper namespace="com.ljzzkkkss.lottery.admin.mapper.AdminUserMapper" >
 
     <select id="findByUserName" parameterType="String" resultType="com.ljzzkkkss.lottery.admin.model.AdminUser">
-        SELECT `id`,`username`,`password`,`phone` FROM `user`
+        SELECT `id`,`username`,`password` FROM `admin_user`
         WHERE
         `username` = #{username}
     </select>

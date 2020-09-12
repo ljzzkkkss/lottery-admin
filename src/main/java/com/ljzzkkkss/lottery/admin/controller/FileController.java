@@ -1,12 +1,14 @@
 package com.ljzzkkkss.lottery.admin.controller;
 
+import com.ljzzkkkss.lottery.admin.constants.ReturnType;
+import com.ljzzkkkss.lottery.admin.model.ReturnBody;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;

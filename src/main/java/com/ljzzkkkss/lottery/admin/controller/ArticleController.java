@@ -6,6 +6,7 @@ import com.ljzzkkkss.lottery.admin.model.ReturnBody;
 import com.ljzzkkkss.lottery.admin.service.ArticleService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
@@ -33,14 +34,14 @@ public class ArticleController {
     }
 
     @ResponseBody
-    @GetMapping("/article/insert")
+    @PostMapping("/article/insert")
     public ReturnBody insert(Article article){
         articleService.insertArticle(article);
         return ReturnType.SUCCESS;
     }
 
     @ResponseBody
-    @GetMapping("/article/update")
+    @PostMapping("/article/update")
     public ReturnBody update(Article article){
         articleService.updateArticleById(article);
         return ReturnType.SUCCESS;
@@ -48,7 +49,7 @@ public class ArticleController {
 
 
     @ResponseBody
-    @GetMapping("/article/delete")
+    @PostMapping("/article/delete")
     public ReturnBody delete(Integer id){
         articleService.deleteArticleById(id);
         return ReturnType.SUCCESS;

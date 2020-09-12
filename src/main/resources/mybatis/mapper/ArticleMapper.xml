@@ -2,18 +2,22 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.ljzzkkkss.lottery.admin.mapper.ArticleMapper" >
 
-    <select id="getArticleListByPage" resultType="com.ljzzkkkss.lottery.admin.model.Atricle">
-        SELECT `id`,`title`,`category`,DATE_FROMAT(`date`,'%Y-%m-%d') `date` FROM `atricle`
+    <select id="getArticleListByPage" resultType="com.ljzzkkkss.lottery.admin.model.Article">
+        SELECT `id`,`title`,`category`,DATE_FORMAT(`date`,'%Y-%m-%d') `date` FROM `article`
         ORDER BY `isTop`,`date` DESC LIMIT #{start},#{pageSize}
     </select>
 
+    <select id="getArticleCount" resultType="Integer">
+        SELECT count(*) FROM `article`
+    </select>
+
     <select id="getArticleById" resultType="com.ljzzkkkss.lottery.admin.model.Article">
-        SELECT `id`,`title`,`subTitle`,`category`,`content`,`lable`,DATE_FROMAT(`date`,'%Y-%m-%d') `date`,`isTop`,`image`,`status` FROM `atricle`
+        SELECT `id`,`title`,`subTitle`,`category`,`content`,`label`,DATE_FORMAT(`date`,'%Y-%m-%d') `date`,`isTop`,`image`,`status` FROM `article`
         WHERE `id` = #{id}
     </select>
 
     <insert id="insertArticle" parameterType="com.ljzzkkkss.lottery.admin.model.Article">
-        INSERT INTO `article`(`title`,`sutTitle`,`category`,`content`,`label`,`date`,`isTop`,`image`,`status`)
+        INSERT INTO `article`(`title`,`subTitle`,`category`,`content`,`label`,`date`,`isTop`,`image`,`status`)
         VALUES(#{title},#{subTitle},#{category},#{content},#{label},#{date},#{isTop},#{image},#{status})
     </insert>
 
@@ -21,14 +25,14 @@
         UPDATE `article`
         <trim prefix="set" suffixOverrides="," >
             <if test="title != null">`title` = #{title},</if>
-            <if test="sutTitle != null">`sutTitle` = #{sutTitle},</if>
+            <if test="subTitle != null">`subTitle` = #{subTitle},</if>
             <if test="category != null">`category` = #{category},</if>
             <if test="content != null">`content` = #{content},</if>
             <if test="label != null">`label` = #{label},</if>
             <if test="date != null">`date` = #{date},</if>
             <if test="isTop != null">`isTop` = #{isTop},</if>
             <if test="image != null">`image` = #{image},</if>
-            <if test="status != null">`image` = #{status},</if>
+            <if test="status != null">`status` = #{status},</if>
         </trim>
         WHERE `id` = #{id}
     </update>

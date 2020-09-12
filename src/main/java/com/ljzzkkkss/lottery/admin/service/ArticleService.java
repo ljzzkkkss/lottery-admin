@@ -4,9 +4,10 @@ import com.ljzzkkkss.lottery.admin.model.Article;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 public interface ArticleService {
-    List<Article> getArticleListByPage(Integer pageIndex, Integer pageSize);
+    Map<String,Object> getArticleListByPage(Integer pageIndex, Integer pageSize);
     Article getArticleById(Integer id);
     void insertArticle(Article article);
     void updateArticleById(Article article);

@@ -13,7 +13,7 @@ public class AdminUserServiceImpl implements AdminUserService {
     private AdminUserMapper adminUserMapper;
 
     @Override
-    public AdminUser findByUserName(String usersname) {
-        return adminUserMapper.findByUserName(usersname);
+    public AdminUser findByUserName(String username) {
+        return adminUserMapper.findByUserName(username);
     }
 }

@@ -21,6 +21,7 @@
     <!-- Select2 -->
     <link rel="stylesheet" href="/templates/plugins/select2/css/select2.min.css">
     <link rel="stylesheet" href="/templates/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+    <link rel="stylesheet" href="/templates/css/article.css">
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -150,44 +151,78 @@
                 <form role="form" onsubmit="return false;">
                     <div class="card-body">
                         <div class="form-group">
-                            <label for="id">店铺编号</label>
+                            <label for="id">文章id</label>
                             <input type="text" class="form-control" id="id" disabled>
                         </div>
                         <div class="form-group">
-                            <label for="name">店铺名称</label>
-                            <input type="text" class="form-control" id="name" placeholder="请输入店铺名称">
+                            <label for="title">文章标题</label>
+                            <input type="text" class="form-control" id="title" placeholder="请输文章标题">
                         </div>
                         <div class="form-group">
-                            <label for="address">店铺地址</label>
-                            <input type="text" class="form-control" id="address" placeholder="请输入店铺地址">
-                            <ul id="addressList" class="navbar-nav"></ul>
+                            <label for="subTitle">文章副标题</label>
+                            <input type="text" class="form-control" id="subTitle" placeholder="请输入文章副标题">
                         </div>
                         <div class="form-group">
-                            <label for="name">经度</label>
-                            <input type="text" class="form-control" id="longitude" placeholder="请输入经度">
+                            <label for="content">文章内容</label>
+                            <div data-role="editor-toolbar" data-target="#editor" class="btn-toolbar">
+                                <div class="btn-group">
+                                    <a data-toggle="dropdown" title="Font Size" class="btn dropdown-toggle"><i class="fa fa-text-height"></i><b class="caret"></b></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a style="cursor: pointer" data-edit="fontSize 5"><span style="font-size: large; ">Huge</span></a></li>
+                                        <li><a style="cursor: pointer" data-edit="fontSize 3"><span style="font-size: small; ">Normal</span></a></li>
+                                        <li><a style="cursor: pointer" data-edit="fontSize 1"><span style="font-size: xx-small; ">Small</span></a></li>
+                                    </ul>
+                                </div>
+                                <div class="btn-group">
+                                    <a data-edit="bold" title="Bold (Ctrl/Cmd+B)" class="btn"><i class="fa fa-bold"></i></a>
+                                    <a data-edit="italic" title="Italic (Ctrl/Cmd+I)" class="btn"><i class="fa fa-italic"></i></a>
+                                    <a data-edit="strikethrough" title="Strikethrough" class="btn"><i class="fa fa-strikethrough"></i></a>
+                                    <a data-edit="underline" title="Underline (Ctrl/Cmd+U)" class="btn"><i class="fa fa-underline"></i></a>
+                                </div>
+                                <div class="btn-group">
+                                    <a data-edit="insertunorderedlist" title="Bullet list" class="btn"><i class="fa fa-list-ul"></i></a>
+                                    <a data-edit="insertorderedlist" title="Number list" class="btn"><i class="fa fa-list-ol"></i></a>
+                                    <a data-edit="outdent" title="Reduce indent (Shift+Tab)" class="btn"><i class="fa fa-outdent"></i></a>
+                                    <a data-edit="indent" title="Indent (Tab)" class="btn"><i class="fa fa-indent"></i></a>
+                                </div>
+                                <div class="btn-group">
+                                    <a data-edit="justifyleft" title="Align Left (Ctrl/Cmd+L)" class="btn"><i class="fa fa-align-left"></i></a>
+                                    <a data-edit="justifycenter" title="Center (Ctrl/Cmd+E)" class="btn"><i class="fa fa-align-center"></i></a>
+                                    <a data-edit="justifyright" title="Align Right (Ctrl/Cmd+R)" class="btn"><i class="fa fa-align-right"></i></a>
+                                    <a data-edit="justifyfull" title="Justify (Ctrl/Cmd+J)" class="btn"><i class="fa fa-align-justify"></i></a>
+                                </div>
+                                <div class="btn-group">
+                                    <a data-toggle="dropdown" title="Hyperlink" class="btn dropdown-toggle"><i class="fa fa-link"></i></a>
+                                    <div class="dropdown-menu input-append">
+                                        <input placeholder="URL" type="text" data-edit="createLink"class="span2">
+                                        <button type="button" class="btn">Add</button>
+                                    </div>
+                                    <a data-edit="unlink" title="Remove Hyperlink" class="btn"><i class="fa fa-cut"></i></a>
+                                </div>
+                                <div class="btn-group">
+                                    <div class="btn-group">
+                                        <a data-edit="undo" title="Undo (Ctrl/Cmd+Z)" class="btn"><i class="fa fa-undo"></i></a>
+                                        <a data-edit="redo" title="Redo (Ctrl/Cmd+Y)" class="btn"><i class="fa fa-repeat"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="content" class="content-div"></div>
                         </div>
                         <div class="form-group">
-                            <label for="name">纬度</label>
-                            <input type="text" class="form-control" id="latitude" placeholder="请输入纬度">
+                            <label for="label">文章标签</label>
+                            <input type="text" class="form-control" id="label" placeholder="请输入文章标签">
                         </div>
                         <div class="form-group">
-                            <label for="name">联系电话</label>
-                            <input type="text" class="form-control" id="phone" placeholder="请输入联系电话">
+                            <label for="date">发表日期</label>
+                            <div class="input-group">
+                                <div class="input-group-text">
+                                    <i class="fa fa-calendar"></i>
+                                </div>
+                                <input type="text" id="date" class="form-control">
+                            </div>
                         </div>
                         <div class="form-group">
-                            <label for="synopsis">店铺类型</label>
-                            <input type="text" class="form-control" id="synopsis" placeholder="请输入店铺类型">
-                        </div>
-                        <div class="form-group">
-                            <label for="introduction">店铺详情</label>
-                            <textarea class="form-control" rows="3" id="introduction" placeholder="请输入店铺详情"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="projectDetail">项目详情</label>
-                            <textarea class="form-control" rows="3" id="projectDetail" placeholder="请输入项目详情"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="fileInput">首页图片</label>
+                            <label for="fileInput"></label>
                             <div class="input-group">
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input" id="fileInput">
@@ -197,24 +232,23 @@
                                     <span class="input-group-text" style="cursor: pointer" id="upload">上传</span>
                                 </div>
                             </div>
-                            <div class="card-group" id="image">
+                            <input type="hidden" class="form-control" id="image">
                             </div>
+                        <div class="form-group">
+                            <label for="category">文章分类</label>
+                            <select class="select2bs4" id="category" style="width: 100%;">
+                                <option value="名家推荐">名家推荐</option>
+                                <option value="赛事资讯">赛事资讯</option>
+                                <option value="球队资讯">球队资讯</option>
+                            </select>
                         </div>
                         <div class="custom-control custom-checkbox">
-                            <input class="custom-control-input" type="checkbox" id="inHome">
-                            <label for="inHome" class="custom-control-label">是否在首页显示</label>
+                            <input class="custom-control-input" type="checkbox" id="isTop">
+                            <label for="isTop" class="custom-control-label">是否置顶</label>
                         </div>
                         <div class="custom-control custom-checkbox">
                             <input class="custom-control-input" type="checkbox" id="status">
-                            <label for="status" class="custom-control-label">审核通过</label>
-                        </div>
-                        <div class="form-group">
-                            <label>文章分类</label>
-                            <select class="select2bs4" id="type" style="width: 100%;">
-                                <option value="名家推荐">名家推荐</option>
-                                <option value="赛事资讯">名家推荐</option>
-                                <option value="球队资讯">名家推荐</option>
-                            </select>
+                            <label for="status" class="custom-control-label">是否上架</label>
                         </div>
                     </div>
                     <!-- /.card-body -->
@@ -243,16 +277,18 @@
 <script src="/templates/adminlte/js/demo.js"></script>
 <!-- Select2 -->
 <script src="/templates/plugins/select2/js/select2.full.min.js"></script>
-<script src="https://webapi.amap.com/maps?v=1.4.15&key=bc56a1d7146aac3fc117edd5451d50d6&plugin=AMap.Autocomplete"></script>
+<!-- inputMask -->
+<script src="/templates/plugins/inputmask/min/jquery.inputmask.bundle.min.js"></script>
+<!-- wysihtml -->
+<script src="/templates/plugins/wysiwyg/wysiwyg.js"></script>
 <!-- page script -->
 <script>
     $(function () {
-        //多图片上传删除图片
-        $('#image').on('click','.ion-close',(e) => {
-           $(e.target).parent().remove();
-        });
+        $('#content').wysiwyg();
+
+        $("#date").inputmask({alias: "date"});
         //Initialize Select2 Elements
-        $('#type').select2({
+        $('#category').select2({
             placeholder: '选择文章分类',
             tags: true,
             multiple: false,
@@ -268,17 +304,18 @@
             paging: true,
             filtering: false,
             autoload: true,
+            pageLoading: true,
             noDataContent: '无数据',
             controller: {
-                loadData: function () {
+                loadData: function (page) {
                     var d = $.Deferred();
 
                     $.ajax({
-                        url: "/article/list",
+                        url: "/article/list?pageIndex=" + page.pageIndex +"&pageSize=" + page.pageSize,
                         type: 'GET',
                         dataType: "json"
                     }).done(function (response) {
-                        d.resolve(response.data);
+                        d.resolve(response.data.length === 0 ? null : response.data);
                     });
 
                     return d.promise();
@@ -298,17 +335,15 @@
                                 $(".custom-file-label").text("请选择图片");
                                 $('#fileInput').val('');
                                 $('#id').val('');
-                                $('#name').val('');
-                                $('#address').val('');
-                                $('#longitude').val('');
-                                $('#latitude').val('');
-                                $('#introduction').val('');
-                                $('#projectDetail').val('');
-                                $('#synopsis').val('');
-                                $('#image').html('');
-                                $('#type').val([]).trigger('change');
-                                $('#inHome').attr('checked', false);
-                                $('#stataus').attr('checked', false);
+                                $('#title').val('');
+                                $('#subTitle').val('');
+                                $('#content').html('');
+                                $('#label').val('');
+                                $('#date').val('');
+                                $('#image').val('');
+                                $('#category').val([]).trigger('change');
+                                $('#isTop').attr('checked', false);
+                                $('#status').attr('checked', false);
                                 $("#edit").modal();
                             });
                     },
@@ -321,22 +356,20 @@
                                     dataType: "json"
                                 }).done(function (response) {
                                     let data = response.data;
-                                    let typeArr = item.type.split(',');
+                                    let typeArr = data.category.split(',');
                                     $(".modal-title").text("编辑");
-                                    $(".custom-file-label").text("请选择图片");
+                                    $(".custom-file-label").text(data.image);
                                     $('#fileInput').val('');
                                     $('#id').val(data.id);
-                                    $('#name').val(data.name);
-                                    $('#address').val(data.address);
-                                    $('#phone').val(data.phone);
-                                    $('#longitude').val(data.longitude);
-                                    $('#latitude').val(data.latitude);
-                                    $('#introduction').val(data.introduction);
-                                    $('#projectDetail').val(data.projectDetail);
-                                    $('#synopsis').val(data.synopsis);
-                                    $('#type').val(typeArr).trigger('change');
-                                    $('#inHome').attr('checked', item.inHome === 1);
-                                    $('#status').attr('checked', item.status === 1);
+                                    $('#title').val(data.title);
+                                    $('#subTitle').val(data.subTitle);
+                                    $('#label').val(data.label);
+                                    $('#content').html(data.content);
+                                    $('#date').val(data.date);
+                                    $('#image').val(data.image);
+                                    $('#category').val(typeArr).trigger('change');
+                                    $('#isTop').attr('checked', data.isTop === 1);
+                                    $('#status').attr('checked', data.status === 1);
                                     $("#edit").modal();
                                 });
                             });
@@ -378,33 +411,21 @@
 
         $('#saveBtn').on('click', function () {
             let url = $('#id').val() === '' ? '/article/insert' : '/article/update';
-            let type = $('#type').select2('data').map(d => d.text).join(',');
-            var banner = '';
-            $('#image').find('img').each(function() {
-                if('' === banner) {
-                    banner += $(this).attr('data-value');
-                }else {
-                    banner += (',' + $(this).attr('data-value'));
-                }
-            });
             $.ajax({
                 url: url,
                 type: 'post',
                 contentType: 'application/x-www-form-urlencoded',
                 data: {
                     id: $('#id').val(),
-                    name: $('#name').val(),
-                    address: $('#address').val(),
-                    phone: $('#phone').val(),
-                    longitude: $('#longitude').val(),
-                    latitude: $('#latitude').val(),
-                    introduction: $('#introduction').val(),
-                    projectDetail: $('#projectDetail').val(),
-                    synopsis: $('#synopsis').val(),
-                    banner: banner,
-                    inHome: $('#inHome').val() === 'on' ? 1 : 0,
-                    status: $('#status').val() === 'on' ? 1 : 2,
-                    type: type
+                    title: $('#title').val(),
+                    subTitle: $('#subTitle').val(),
+                    content: $('#content').html(),
+                    label: $('#label').val(),
+                    date: $('#date').val(),
+                    image:  $('#image').val(),
+                    isTop: $('#isTop')[0].checked ? 1 : 0,
+                    status: $('#status')[0].checked  ? 1 : 2,
+                    category: $('#category').val()
                 },
                 dataType: "json",
                 success: (res) => {
@@ -453,10 +474,7 @@
                 success: (res) => {
                     if (res.code === '0000') {
                         window.alert("上传成功！");
-                        $('#image').append('<label style="padding-right: 5px;">' +
-                            '<img src="' + localStorage.getItem("ctx") + res.data + '" width="100" height="50" data-value="'+ res.data +'" style="padding-top: 5px;">' +
-                            '<span class="ion-close" style="cursor: pointer;">&times;</span>' +
-                            '</label>')
+                        $('#image').val(res.data);
                     } else {
                         window.alert("上传失败！");
                         return false;

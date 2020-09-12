@@ -18,7 +18,7 @@ CREATE TABLE `article` (
   `title` varchar(100) DEFAULT NULL COMMENT '文章标题',
   `subTitle` varchar(45) DEFAULT NULL COMMENT '文章副标题（命中率等）',
   `category` varchar(45) DEFAULT NULL COMMENT '文章分类（赛事资讯等）',
-  `lable` varchar(255) DEFAULT NULL COMMENT '文章标签',
+  `label` varchar(255) DEFAULT NULL COMMENT '文章标签',
   `content` text COMMENT '文章内容',
   `date` date DEFAULT NULL COMMENT '发表日期',
   `isTop` tinyint(4) DEFAULT NULL COMMENT '是否置顶 0 否，1 是',
