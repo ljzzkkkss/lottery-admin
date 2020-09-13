@@ -11,6 +11,9 @@ public class Optional implements Serializable {
     private Integer status;
     private String name;
     private String cost;
+    private Integer times;
+    private String game;
+    private Integer noteNumber;
     private String optionDate;
 
     public Integer getId() {
@@ -67,5 +70,29 @@ public class Optional implements Serializable {
 
     public void setCost(String cost) {
         this.cost = cost;
+    }
+
+    public Integer getTimes() {
+        return times;
+    }
+
+    public void setTimes(Integer times) {
+        this.times = times;
+    }
+
+    public String getGame() {
+        return game;
+    }
+
+    public void setGame(String game) {
+        this.game = game;
+    }
+
+    public Integer getNoteNumber() {
+        return noteNumber;
+    }
+
+    public void setNoteNumber(Integer noteNumber) {
+        this.noteNumber = noteNumber;
     }
 }

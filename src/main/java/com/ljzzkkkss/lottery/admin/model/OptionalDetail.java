@@ -11,7 +11,6 @@ public class OptionalDetail implements Serializable {
     private String category;
     private String rate;
     private String content;
-    private Integer times;
 
     public Integer getId() {
         return id;
@@ -59,13 +58,5 @@ public class OptionalDetail implements Serializable {
 
     public void setContent(String content) {
         this.content = content;
-    }
-
-    public Integer getTimes() {
-        return times;
-    }
-
-    public void setTimes(Integer times) {
-        this.times = times;
     }
 }
