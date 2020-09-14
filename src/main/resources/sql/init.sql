@@ -42,13 +42,13 @@ CREATE TABLE `log` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='日志表';
 
 CREATE TABLE `match` (
-  `id` bigint(20) NOT NULL COMMENT '赛事id',
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '赛事id',
   `mainTeam` varchar(45) DEFAULT NULL COMMENT '主队',
   `clientTeam` varchar(45) DEFAULT NULL COMMENT '客队',
   `halfScore` varchar(45) DEFAULT NULL COMMENT '半场比分',
   `totalScore` varchar(45) DEFAULT NULL COMMENT '全场比分',
   `match` varchar(45) DEFAULT NULL COMMENT '所属联赛',
-  `round` varchar(45) DEFAULT NULL COMMENT '轮次',
+  `round` varchar(45) DEFAULT NULL COMMENT '场次',
   `matchTime` datetime DEFAULT NULL COMMENT '比赛时间',
   `status` varchar(45) DEFAULT NULL COMMENT '比赛状态',
   PRIMARY KEY (`id`),

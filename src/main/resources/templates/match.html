@@ -80,7 +80,7 @@
                         </ul>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="/banner" class="nav-link active">
+                                <a href="/banner" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>banner列表</p>
                                 </a>
@@ -88,7 +88,7 @@
                         </ul>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="/match" class="nav-link">
+                                <a href="/match" class="nav-link active">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>比分列表</p>
                                 </a>
@@ -149,7 +149,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>banner</h1>
+                        <h1>比分</h1>
                     </div>
                     <div class="col-sm-6">
                     </div>
@@ -162,7 +162,7 @@
         <section class="content">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">banner列表</h3>
+                    <h3 class="card-title">比分列表</h3>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
@@ -193,54 +193,6 @@
 </div>
 <!-- ./wrapper -->
 
-<div class="modal fade" id="edit">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">banner详情</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form role="form" onsubmit="return false;">
-                    <div class="card-body">
-                        <div class="form-group">
-                            <label for="id">bannerId</label>
-                            <input type="text" class="form-control" id="id" disabled>
-                        </div>
-                        <div class="form-group">
-                            <label for="url">banner跳转地址</label>
-                            <input type="text" class="form-control" id="url" placeholder="请输入跳转地址，http开头">
-                        </div>
-                        <div class="form-group">
-                            <label for="fileInput"></label>
-                            <div class="input-group">
-                                <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="fileInput">
-                                    <label class="custom-file-label" for="fileInput">选择图片</label>
-                                </div>
-                                <div class="input-group-append">
-                                    <span class="input-group-text" style="cursor: pointer" id="upload">上传</span>
-                                </div>
-                            </div>
-                            <input type="hidden" class="form-control" id="img">
-                        </div>
-                    </div>
-                    <!-- /.card-body -->
-                </form>
-            </div>
-            <div class="modal-footer justify-content-between">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary" id="saveBtn">保存</button>
-            </div>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
-<!-- /.modal -->
-
 <!-- jQuery -->
 <script src="/templates/plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
@@ -261,13 +213,14 @@
             paging: true,
             filtering: false,
             autoload: true,
+            pageLoading: true,
             noDataContent: '无数据',
             controller: {
-                loadData: function () {
+                loadData: function (page) {
                     var d = $.Deferred();
 
                     $.ajax({
-                        url: "/banner/list",
+                        url: "/match/list?pageIndex=" + page.pageIndex +"&pageSize=" + page.pageSize,
                         type: 'GET',
                         dataType: "json"
                     }).done(function (response) {
@@ -279,139 +232,16 @@
             },
             fields: [
                 {title: "id", name: "id", type: "number", width: 50, align: "center"},
-                {title: "banner图片", name: "img", type: "text", width: 100, align: "center"},
-                {title: "banner跳转地址", name: "url", type: "text", width: 200, align: "center"},
-                {
-                    name: "操作", type: "control", width: 150, align: "center", filter: false,
-                    headerTemplate: function () {
-                        return $("<input class=\"jsgrid-button jsgrid-mode-button jsgrid-insert-mode-button\" type=\"button\" title=\"\">")
-                            .on("click", () => {
-                                $(".modal-title").text("新增");
-                                $(".custom-file-label").text("请选择图片");
-                                $('#fileInput').val('');
-                                $('#id').val('');
-                                $('#url').val('');
-                                $('#img').val('');
-                                $("#edit").modal();
-                            });
-                    },
-                    itemTemplate: function (_, item) {
-                        let editBtn = $("<input class=\"jsgrid-button jsgrid-edit-button\" type=\"button\" title=\"编辑\">")
-                            .on('click', function () {
-                                $(".modal-title").text("编辑");
-                                $(".custom-file-label").text(item.img);
-                                $('#fileInput').val('');
-                                $('#id').val(item.id);
-                                $('#url').val(item.url);
-                                $('#img').val(item.img);
-                                $("#edit").modal();
-                            });
-
-                        let delBtn = $("<input class=\"jsgrid-button jsgrid-delete-button\" type=\"button\" title=\"删除\">")
-                            .on('click', function () {
-                                if (window.confirm("确定删除这个banner？")) {
-                                    $.ajax({
-                                        url: '/banner/delete',
-                                        contentType: 'application/x-www-form-urlencoded',
-                                        data: {
-                                            id: item.id
-                                        },
-                                        type: 'POST',
-                                        dataType: "json",
-                                        success: (res) => {
-                                            if (res.code === '0000') {
-                                                $("#jsGrid").jsGrid("loadData");
-                                                window.alert("删除成功！");
-                                            } else {
-                                                window.alert("删除失败！");
-                                                return false;
-                                            }
-                                        },
-                                        error: (e) => {
-                                            console.error(e);
-                                            window.alert("删除失败！");
-                                        }
-                                    })
-                                }
-                            });
-                        return $('<label>')
-                            .append(editBtn)
-                            .append(delBtn);
-                    }
-                },
+                {title: "主队", name: "mainTeam", type: "text", width: 100, align: "center"},
+                {title: "客队", name: "clientTeam", type: "text", width: 100, align: "center"},
+                {title: "半场比分", name: "halfScore", type: "text", width: 100, align: "center"},
+                {title: "全场比分", name: "totalScore", type: "text", width: 100, align: "center"},
+                {title: "所属联赛", name: "match", type: "text", width: 100, align: "center"},
+                {title: "场次", name: "round", type: "text", width: 100, align: "center"},
+                {title: "比赛时间", name: "matchTime", type: "text", width: 100, align: "center"},
+                {title: "比赛状态", name: "status", type: "text", width: 100, align: "center"},
             ]
         });
-
-        $('#saveBtn').on('click', function () {
-            let url = $('#id').val() === '' ? '/banner/insert' : '/banner/update';
-            $.ajax({
-                url: url,
-                type: 'post',
-                contentType: 'application/x-www-form-urlencoded',
-                data: {
-                    id: $('#id').val(),
-                    url: $('#url').val(),
-                    img:  $('#img').val()
-                },
-                dataType: "json",
-                success: (res) => {
-                    if (res.code === '0000') {
-                        window.alert("保存成功！");
-                        $("#edit").modal("hide");
-                        $("#jsGrid").jsGrid("loadData");
-                    } else {
-                        window.alert("保存失败！");
-                        return false;
-                    }
-                },
-                error: (e) => {
-                    console.error(e);
-                    window.alert("保存失败！");
-                }
-            })
-        });
-        $("#fileInput").on("change", (e) => {
-            if (undefined === e.target.files[0]) {
-                $(".custom-file-label").text("请选择图片");
-                return;
-            }
-            $(".custom-file-label").text(e.target.files[0].name);
-        });
-        //上传文件
-        $("#upload").on("click", () => {
-            var file = $("#fileInput")[0].files[0];
-            if (undefined === file) {
-                alert("请选择图片！");
-                return;
-            }
-            if (file.type !== "image/jpg" && file.type !== "image/jpeg" && file.type !== "image/png") {
-                alert("文件类型错误，请选择图片！");
-                return;
-            }
-            var formData = new FormData();
-            formData.append("file", file);
-            $.ajax({
-                url: "/file/upload",
-                data: formData,
-                type: 'POST',
-                dataType: "json",
-                processData: false,
-                contentType: false,
-                success: (res) => {
-                    if (res.code === '0000') {
-                        window.alert("上传成功！");
-                        $('#img').val(res.data);
-                    } else {
-                        window.alert("上传失败！");
-                        return false;
-                    }
-                },
-                error: (e) => {
-                    console.error(e);
-                    window.alert("上传失败！");
-                }
-            });
-        })
     });
 </script>
 </body>

@@ -89,7 +89,7 @@
                         </ul>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="/score" class="nav-link">
+                                <a href="/match" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>比分列表</p>
                                 </a>
@@ -371,7 +371,7 @@
                         type: 'GET',
                         dataType: "json"
                     }).done(function (response) {
-                        d.resolve(response.data.length === 0 ? null : response.data);
+                        d.resolve(response.data);
                     });
 
                     return d.promise();

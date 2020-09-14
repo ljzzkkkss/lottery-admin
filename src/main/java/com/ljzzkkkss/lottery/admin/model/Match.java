@@ -13,7 +13,7 @@ public class Match implements Serializable {
     private String match;
     private String round;
     private String matchTime;
-    private Integer status;
+    private String status;
 
     public Long getId() {
         return id;
@@ -79,11 +79,11 @@ public class Match implements Serializable {
         this.matchTime = matchTime;
     }
 
-    public Integer getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 }
