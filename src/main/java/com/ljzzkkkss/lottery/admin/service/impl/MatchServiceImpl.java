@@ -1,7 +1,6 @@
 package com.ljzzkkkss.lottery.admin.service.impl;
 
 import com.ljzzkkkss.lottery.admin.mapper.MatchMapper;
-import com.ljzzkkkss.lottery.admin.model.Article;
 import com.ljzzkkkss.lottery.admin.model.Match;
 import com.ljzzkkkss.lottery.admin.service.MatchService;
 import org.springframework.stereotype.Service;
