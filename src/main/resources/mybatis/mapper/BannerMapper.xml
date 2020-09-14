@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ljzzkkkss.lottery.admin.mapper.BannerMapper" >
+
+    <select id="getBannerList" resultType="com.ljzzkkkss.lottery.admin.model.Banner">
+        SELECT `id`,`img`,`url` FROM `banner`;
+    </select>
+
+    <insert id="insertBanner" parameterType="com.ljzzkkkss.lottery.admin.model.Banner">
+        INSERT INTO `banner`(`img`,`url`) VALUES(#{img},#{url})
+    </insert>
+
+
+    <update id="updateBannerById" parameterType="com.ljzzkkkss.lottery.admin.model.Banner">
+        UPDATE `banner`
+        <trim prefix="set" suffixOverrides="," >
+            <if test="img != null">`img` = #{img},</if>
+            <if test="url != null">`url` = #{url},</if>
+        </trim>
+        WHERE `id` = #{id}
+    </update>
+
+    <delete id="deleteBannerById" parameterType="Integer">
+        DELETE FROM `banner` WHERE `id` = #{id}
+    </delete>
+</mapper>

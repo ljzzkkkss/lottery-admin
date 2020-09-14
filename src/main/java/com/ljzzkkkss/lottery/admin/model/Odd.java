@@ -10,6 +10,7 @@ public class Odd implements Serializable {
     private String category;
     private String rate;
     private String content;
+    private Integer single;
 
     public Long getId() {
         return id;
@@ -49,5 +50,13 @@ public class Odd implements Serializable {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public Integer getSingle() {
+        return single;
+    }
+
+    public void setSingle(Integer single) {
+        this.single = single;
     }
 }

@@ -21,7 +21,6 @@
     <!-- Select2 -->
     <link rel="stylesheet" href="/templates/plugins/select2/css/select2.min.css">
     <link rel="stylesheet" href="/templates/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
-    <link rel="stylesheet" href="/templates/css/article.css">
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -73,7 +72,7 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="/article" class="nav-link active">
+                                <a href="/article" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>文章列表</p>
                                 </a>
@@ -81,7 +80,7 @@
                         </ul>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="/banner" class="nav-link">
+                                <a href="/banner" class="nav-link active">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>banner列表</p>
                                 </a>
@@ -150,7 +149,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>文章</h1>
+                        <h1>banner</h1>
                     </div>
                     <div class="col-sm-6">
                     </div>
@@ -163,7 +162,7 @@
         <section class="content">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">文章列表</h3>
+                    <h3 class="card-title">banner列表</h3>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
@@ -198,7 +197,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">文章详情</h4>
+                <h4 class="modal-title">banner详情</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -207,75 +206,12 @@
                 <form role="form" onsubmit="return false;">
                     <div class="card-body">
                         <div class="form-group">
-                            <label for="id">文章id</label>
+                            <label for="id">bannerId</label>
                             <input type="text" class="form-control" id="id" disabled>
                         </div>
                         <div class="form-group">
-                            <label for="title">文章标题</label>
-                            <input type="text" class="form-control" id="title" placeholder="请输文章标题">
-                        </div>
-                        <div class="form-group">
-                            <label for="subTitle">文章副标题</label>
-                            <input type="text" class="form-control" id="subTitle" placeholder="请输入文章副标题">
-                        </div>
-                        <div class="form-group">
-                            <label for="content">文章内容</label>
-                            <div data-role="editor-toolbar" data-target="#editor" class="btn-toolbar">
-                                <div class="btn-group">
-                                    <a data-toggle="dropdown" title="Font Size" class="btn dropdown-toggle"><i class="fa fa-text-height"></i><b class="caret"></b></a>
-                                    <ul class="dropdown-menu">
-                                        <li><a style="cursor: pointer" data-edit="fontSize 5"><span style="font-size: large; ">Huge</span></a></li>
-                                        <li><a style="cursor: pointer" data-edit="fontSize 3"><span style="font-size: small; ">Normal</span></a></li>
-                                        <li><a style="cursor: pointer" data-edit="fontSize 1"><span style="font-size: xx-small; ">Small</span></a></li>
-                                    </ul>
-                                </div>
-                                <div class="btn-group">
-                                    <a data-edit="bold" title="Bold (Ctrl/Cmd+B)" class="btn"><i class="fa fa-bold"></i></a>
-                                    <a data-edit="italic" title="Italic (Ctrl/Cmd+I)" class="btn"><i class="fa fa-italic"></i></a>
-                                    <a data-edit="strikethrough" title="Strikethrough" class="btn"><i class="fa fa-strikethrough"></i></a>
-                                    <a data-edit="underline" title="Underline (Ctrl/Cmd+U)" class="btn"><i class="fa fa-underline"></i></a>
-                                </div>
-                                <div class="btn-group">
-                                    <a data-edit="insertunorderedlist" title="Bullet list" class="btn"><i class="fa fa-list-ul"></i></a>
-                                    <a data-edit="insertorderedlist" title="Number list" class="btn"><i class="fa fa-list-ol"></i></a>
-                                    <a data-edit="outdent" title="Reduce indent (Shift+Tab)" class="btn"><i class="fa fa-outdent"></i></a>
-                                    <a data-edit="indent" title="Indent (Tab)" class="btn"><i class="fa fa-indent"></i></a>
-                                </div>
-                                <div class="btn-group">
-                                    <a data-edit="justifyleft" title="Align Left (Ctrl/Cmd+L)" class="btn"><i class="fa fa-align-left"></i></a>
-                                    <a data-edit="justifycenter" title="Center (Ctrl/Cmd+E)" class="btn"><i class="fa fa-align-center"></i></a>
-                                    <a data-edit="justifyright" title="Align Right (Ctrl/Cmd+R)" class="btn"><i class="fa fa-align-right"></i></a>
-                                    <a data-edit="justifyfull" title="Justify (Ctrl/Cmd+J)" class="btn"><i class="fa fa-align-justify"></i></a>
-                                </div>
-                                <div class="btn-group">
-                                    <a data-toggle="dropdown" title="Hyperlink" class="btn dropdown-toggle"><i class="fa fa-link"></i></a>
-                                    <div class="dropdown-menu input-append">
-                                        <input placeholder="URL" type="text" data-edit="createLink"class="span2">
-                                        <button type="button" class="btn">Add</button>
-                                    </div>
-                                    <a data-edit="unlink" title="Remove Hyperlink" class="btn"><i class="fa fa-cut"></i></a>
-                                </div>
-                                <div class="btn-group">
-                                    <div class="btn-group">
-                                        <a data-edit="undo" title="Undo (Ctrl/Cmd+Z)" class="btn"><i class="fa fa-undo"></i></a>
-                                        <a data-edit="redo" title="Redo (Ctrl/Cmd+Y)" class="btn"><i class="fa fa-repeat"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div id="content" class="content-div"></div>
-                        </div>
-                        <div class="form-group">
-                            <label for="label">文章标签</label>
-                            <input type="text" class="form-control" id="label" placeholder="请输入文章标签">
-                        </div>
-                        <div class="form-group">
-                            <label for="date">发表日期</label>
-                            <div class="input-group">
-                                <div class="input-group-text">
-                                    <i class="fa fa-calendar"></i>
-                                </div>
-                                <input type="text" id="date" class="form-control">
-                            </div>
+                            <label for="url">banner跳转地址</label>
+                            <input type="text" class="form-control" id="url" placeholder="请输入跳转地址，http开头">
                         </div>
                         <div class="form-group">
                             <label for="fileInput"></label>
@@ -288,23 +224,7 @@
                                     <span class="input-group-text" style="cursor: pointer" id="upload">上传</span>
                                 </div>
                             </div>
-                            <input type="hidden" class="form-control" id="image">
-                            </div>
-                        <div class="form-group">
-                            <label for="category">文章分类</label>
-                            <select class="select2bs4" id="category" style="width: 100%;">
-                                <option value="名家推荐">名家推荐</option>
-                                <option value="赛事资讯">赛事资讯</option>
-                                <option value="球队资讯">球队资讯</option>
-                            </select>
-                        </div>
-                        <div class="custom-control custom-checkbox">
-                            <input class="custom-control-input" type="checkbox" id="isTop">
-                            <label for="isTop" class="custom-control-label">是否置顶</label>
-                        </div>
-                        <div class="custom-control custom-checkbox">
-                            <input class="custom-control-input" type="checkbox" id="status">
-                            <label for="status" class="custom-control-label">是否上架</label>
+                            <input type="hidden" class="form-control" id="img">
                         </div>
                     </div>
                     <!-- /.card-body -->
@@ -340,19 +260,6 @@
 <!-- page script -->
 <script>
     $(function () {
-        $('#content').wysiwyg();
-
-        $("#date").inputmask({alias: "date"});
-        //Initialize Select2 Elements
-        $('#category').select2({
-            placeholder: '选择文章分类',
-            tags: true,
-            multiple: false,
-            height: '40px',
-            allowClear: true,
-            language: "zh-CN",
-        });
-
         $("#jsGrid").jsGrid({
             height: "500px",
             width: "100%",
@@ -360,28 +267,26 @@
             paging: true,
             filtering: false,
             autoload: true,
-            pageLoading: true,
             noDataContent: '无数据',
             controller: {
-                loadData: function (page) {
+                loadData: function () {
                     var d = $.Deferred();
 
                     $.ajax({
-                        url: "/article/list?pageIndex=" + page.pageIndex +"&pageSize=" + page.pageSize,
+                        url: "/banner/list",
                         type: 'GET',
                         dataType: "json"
                     }).done(function (response) {
-                        d.resolve(response.data.length === 0 ? null : response.data);
+                        d.resolve(response.data);
                     });
 
                     return d.promise();
                 }
             },
             fields: [
-                {title: "id", name: "id", type: "number", width: 50, align: "center", visible: false},
-                {title: "文章标题", name: "title", type: "text", width: 100, align: "center"},
-                {title: "文章分类", name: "category", type: "text", width: 200, align: "center"},
-                {title: "日期", name: "date", type: "text", width: 200, align: "center"},
+                {title: "id", name: "id", type: "number", width: 50, align: "center"},
+                {title: "banner图片", name: "img", type: "text", width: 100, align: "center"},
+                {title: "banner跳转地址", name: "url", type: "text", width: 200, align: "center"},
                 {
                     name: "操作", type: "control", width: 150, align: "center", filter: false,
                     headerTemplate: function () {
@@ -391,50 +296,28 @@
                                 $(".custom-file-label").text("请选择图片");
                                 $('#fileInput').val('');
                                 $('#id').val('');
-                                $('#title').val('');
-                                $('#subTitle').val('');
-                                $('#content').html('');
-                                $('#label').val('');
-                                $('#date').val('');
-                                $('#image').val('');
-                                $('#category').val([]).trigger('change');
-                                $('#isTop').attr('checked', false);
-                                $('#status').attr('checked', false);
+                                $('#url').val('');
+                                $('#img').val('');
                                 $("#edit").modal();
                             });
                     },
                     itemTemplate: function (_, item) {
                         let editBtn = $("<input class=\"jsgrid-button jsgrid-edit-button\" type=\"button\" title=\"编辑\">")
                             .on('click', function () {
-                                $.ajax({
-                                    url: "/article/detail?id=" + item.id,
-                                    type: 'GET',
-                                    dataType: "json"
-                                }).done(function (response) {
-                                    let data = response.data;
-                                    let typeArr = data.category.split(',');
-                                    $(".modal-title").text("编辑");
-                                    $(".custom-file-label").text(data.image);
-                                    $('#fileInput').val('');
-                                    $('#id').val(data.id);
-                                    $('#title').val(data.title);
-                                    $('#subTitle').val(data.subTitle);
-                                    $('#label').val(data.label);
-                                    $('#content').html(data.content);
-                                    $('#date').val(data.date);
-                                    $('#image').val(data.image);
-                                    $('#category').val(typeArr).trigger('change');
-                                    $('#isTop').attr('checked', data.isTop === 1);
-                                    $('#status').attr('checked', data.status === 1);
-                                    $("#edit").modal();
-                                });
+                                $(".modal-title").text("编辑");
+                                $(".custom-file-label").text(item.img);
+                                $('#fileInput').val('');
+                                $('#id').val(item.id);
+                                $('#url').val(item.url);
+                                $('#img').val(item.img);
+                                $("#edit").modal();
                             });
 
                         let delBtn = $("<input class=\"jsgrid-button jsgrid-delete-button\" type=\"button\" title=\"删除\">")
                             .on('click', function () {
-                                if (window.confirm("确定删除这个文章？")) {
+                                if (window.confirm("确定删除这个banner？")) {
                                     $.ajax({
-                                        url: '/article/delete',
+                                        url: '/banner/delete',
                                         contentType: 'application/x-www-form-urlencoded',
                                         data: {
                                             id: item.id
@@ -443,8 +326,8 @@
                                         dataType: "json",
                                         success: (res) => {
                                             if (res.code === '0000') {
-                                                window.alert("删除成功！");
                                                 $("#jsGrid").jsGrid("loadData");
+                                                window.alert("删除成功！");
                                             } else {
                                                 window.alert("删除失败！");
                                                 return false;
@@ -466,22 +349,15 @@
         });
 
         $('#saveBtn').on('click', function () {
-            let url = $('#id').val() === '' ? '/article/insert' : '/article/update';
+            let url = $('#id').val() === '' ? '/banner/insert' : '/banner/update';
             $.ajax({
                 url: url,
                 type: 'post',
                 contentType: 'application/x-www-form-urlencoded',
                 data: {
                     id: $('#id').val(),
-                    title: $('#title').val(),
-                    subTitle: $('#subTitle').val(),
-                    content: $('#content').html(),
-                    label: $('#label').val(),
-                    date: $('#date').val(),
-                    image:  $('#image').val(),
-                    isTop: $('#isTop')[0].checked ? 1 : 0,
-                    status: $('#status')[0].checked  ? 1 : 2,
-                    category: $('#category').val()
+                    url: $('#url').val(),
+                    img:  $('#img').val()
                 },
                 dataType: "json",
                 success: (res) => {
@@ -530,7 +406,7 @@
                 success: (res) => {
                     if (res.code === '0000') {
                         window.alert("上传成功！");
-                        $('#image').val(res.data);
+                        $('#img').val(res.data);
                     } else {
                         window.alert("上传失败！");
                         return false;
