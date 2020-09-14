@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ljzzkkkss.lottery.admin.mapper.LogMapper" >
+
+    <select id="getLogListByPage" resultType="com.ljzzkkkss.lottery.admin.model.Log">
+        SELECT `id`,`content`,`phone`,`logTime`
+        FROM `log` ORDER BY `logTime` DESC LIMIT #{start},#{pageSize};
+    </select>
+
+    <select id="countLog" resultType="Integer">
+        SELECT COUNT(*)  FROM `log`;
+    </select>
+
+    <select id="countLogByContentAndDay" resultType="Integer">
+        SELECT COUNT(DISTINCT `phone`)
+        FROM `log` WHERE `content` = #{content} AND DATE(`logTime`) = #{day}
+        ORDER BY `logTime` DESC LIMIT #{start},#{pageSize};
+    </select>
+</mapper>

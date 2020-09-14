@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <title>彩票管理后台</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="/templates/plugins/fontawesome-free/css/all.min.css"/>
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="/templates/adminlte/css/ionicons.min.css"/>
+    <!-- jsGrid -->
+    <link rel="stylesheet" href="/templates/plugins/jsgrid/jsgrid.min.css"/>
+    <link rel="stylesheet" href="/templates/plugins/jsgrid/jsgrid-theme.min.css"/>
+    <!-- Theme style -->
+    <link rel="stylesheet" href="/templates/adminlte/css/adminlte.min.css"/>
+    <!-- Google Font: Source Sans Pro -->
+    <!-- <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet"> -->
+    <!-- Select2 -->
+    <link rel="stylesheet" href="/templates/plugins/select2/css/select2.min.css">
+    <link rel="stylesheet" href="/templates/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+</head>
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+    <!-- Navbar -->
+    <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+        <!-- Left navbar links -->
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" data-widget="pushmenu" href="#"
+                ><i class="fas fa-bars"></i
+                ></a>
+            </li>
+        </ul>
+    </nav>
+    <!-- /.navbar -->
+
+    <!-- Main Sidebar Container -->
+    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+        <!-- Brand Logo -->
+        <a href="javascript:;" class="brand-link">
+            <img
+                    src="/templates/adminlte/img/AdminLTELogo.png"
+                    alt="AdminLTE Logo"
+                    class="brand-image img-circle elevation-3"
+                    style="opacity: .8"
+            />
+            <span class="brand-text font-weight-light">彩票</span>
+        </a>
+
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <!-- Sidebar Menu -->
+            <nav class="mt-2">
+                <ul
+                        class="nav nav-pills nav-sidebar flex-column"
+                        data-widget="treeview"
+                        role="menu"
+                        data-accordion="false"
+                >
+                    <!-- Add icons to the links using the .nav-icon class
+                     with font-awesome or any other icon font library -->
+                    <li class="nav-item has-treeview menu-open">
+                        <a href="#" class="nav-link active">
+                            <i class="nav-icon fas fa-table"></i>
+                            <p>
+                                基础信息管理
+                                <i class="fas fa-angle-left right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="/article" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>文章列表</p>
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="/banner" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>banner列表</p>
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="/match" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>比分列表</p>
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="/user" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>用户列表</p>
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="/log" class="nav-link active">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>日志列表</p>
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="/help" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>帮助列表</p>
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="/note" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>留言列表</p>
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="/optional" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>投注方案列表</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+            <!-- /.sidebar-menu -->
+        </div>
+        <!-- /.sidebar -->
+    </aside>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>日志</h1>
+                    </div>
+                    <div class="col-sm-6">
+                    </div>
+                </div>
+            </div>
+            <!-- /.container-fluid -->
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title" style="padding-right: 20px;">今日注册人数：<label id="registerNum">0</label></h3>
+                    <h3 class="card-title">今日登陆人数：<label id="loginNum">0</label></h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <div id="jsGrid"></div>
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+    <footer class="main-footer">
+        <div class="float-right d-none d-sm-block">
+            <b>Version</b> 0.0.1 alpha
+        </div>
+        <strong
+        >Copyright &copy; 2019
+            <a href="javascript:void(0);">BitStudio</a>.</strong>
+        All rights reserved.
+    </footer>
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery -->
+<script src="/templates/plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="/templates/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- jsGrid -->
+<script src="/templates/plugins/jsgrid/jsgrid.min.js"></script>
+<!-- AdminLTE App -->
+<script src="/templates/adminlte/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="/templates/adminlte/js/demo.js"></script>
+<!-- page script -->
+<script>
+    $(function () {
+        $("#jsGrid").jsGrid({
+            height: "500px",
+            width: "100%",
+            sorting: true,
+            paging: true,
+            filtering: false,
+            autoload: true,
+            pageLoading: true,
+            noDataContent: '无数据',
+            controller: {
+                loadData: function (page) {
+                    var d = $.Deferred();
+
+                    $.ajax({
+                        url: "/log/list?pageIndex=" + page.pageIndex +"&pageSize=" + page.pageSize,
+                        type: 'GET',
+                        dataType: "json"
+                    }).done(function (response) {
+                        d.resolve(response.data);
+                    });
+
+                    return d.promise();
+                }
+            },
+            fields: [
+                {title: "id", name: "id", type: "number", width: 50, align: "center"},
+                {title: "日志内容", name: "content", type: "text", width: 100, align: "center"},
+                {title: "用户电话", name: "phone", type: "text", width: 100, align: "center"},
+                {title: "日志时间", name: "logTime", type: "text", width: 100, align: "center"}
+            ]
+        });
+    });
+</script>
+</body>
+</html>
