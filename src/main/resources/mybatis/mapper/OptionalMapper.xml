@@ -7,8 +7,24 @@
         WHERE `id` = #{id}
     </select>
 
-    <select id="getOptionalByOptionalId" parameterType="Integer" resultType="com.ljzzkkkss.lottery.admin.model.Optional">
-        SELECT `id`,`name`,`optionDate`,`cost`,`times`,`game`,`noteNumber` FROM `optional`
-        WHERE `id` = #{id}
+    <select id="getOptionalListByPage" resultType="com.ljzzkkkss.lottery.admin.model.Optional">
+        SELECT o.`id`,o.`name`,u.`username`,o.`optionDate`,o.`cost`,o.`times`,o.`game`,o.`noteNumber`,o.`status`,o.`lotteryImg`,o.`lotteryImg2`
+        FROM `optional` o LEFT JOIN `user` u ON o.`userId` = u.`id`
+        WHERE o.`status` != 0
+        ORDER BY o.`optionDate` DESC LIMIT #{start},#{pageSize};
     </select>
+
+    <select id="countOptional" resultType="Integer">
+        SELECT COUNT(*) FROM `optional` WHERE `status` != 0;
+    </select>
+
+    <update id="updateOptionalById" parameterType="com.ljzzkkkss.lottery.admin.model.Optional">
+        UPDATE `optional`
+        <trim prefix="set" suffixOverrides="," >
+            <if test="lotteryImg != null">`lotteryImg` = #{lotteryImg},</if>
+            <if test="lotteryImg2 != null">`lotteryImg2` = #{lotteryImg2},</if>
+            <if test="status != null">`status` = #{status},</if>
+        </trim>
+        WHERE `id` = #{id}
+    </update>
 </mapper>

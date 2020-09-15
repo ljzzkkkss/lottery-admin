@@ -7,6 +7,7 @@ public class Optional implements Serializable {
 
     private Integer id;
     private Integer userId;
+    private String username;
     private String lotteryImg;
     private String lotteryImg2;
     private Integer status;
@@ -103,5 +104,13 @@ public class Optional implements Serializable {
 
     public void setLotteryImg2(String lotteryImg2) {
         this.lotteryImg2 = lotteryImg2;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }
