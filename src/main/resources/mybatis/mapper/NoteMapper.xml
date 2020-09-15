@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ljzzkkkss.lottery.admin.mapper.NoteMapper" >
+
+    <select id="getNoteListByPage" resultType="com.ljzzkkkss.lottery.admin.model.Note">
+        SELECT n.`id`,u.`username`,n.`content`,n.`optionalId`,n.`noteTime` FROM `note` n RIGHT JOIN `user` u ON n.`userId` = u.`id`
+        ORDER BY n.`noteTime` DESC LIMIT #{start},#{pageSize};
+    </select>
+
+    <select id="countNote" resultType="Integer">
+        SELECT COUNT(*) FROM `note`;
+    </select>
+</mapper>
