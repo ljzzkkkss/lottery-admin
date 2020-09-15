@@ -7,6 +7,13 @@
         FROM `match` ORDER BY `matchTime` DESC LIMIT #{start},#{pageSize};
     </select>
 
+    <select id="getMatchListNotStart" resultType="com.ljzzkkkss.lottery.admin.model.Match">
+        SELECT `id`,`mainTeam`,`clientTeam`,`match`,`round`,`matchTime`,`status`
+        FROM `match` WHERE `status` = '未开始'
+        ORDER BY `matchTime` DESC;
+    </select>
+
+
     <select id="countMatch" resultType="Integer">
         SELECT COUNT(*)  FROM `match`;
     </select>

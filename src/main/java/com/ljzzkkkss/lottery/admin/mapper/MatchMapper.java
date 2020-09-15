@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface MatchMapper {
     List<Match> getMatchListByPage(@Param("start")Integer start,@Param("pageSize")Integer pageSize);
+    List<Match> getMatchListNotStart();
     Integer countMatch();
     Match getMatchById(@Param("id")Long id);
 }
