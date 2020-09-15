@@ -6,4 +6,9 @@
         SELECT `id`,`name`,`optionDate`,`cost`,`times`,`game`,`noteNumber` FROM `optional`
         WHERE `id` = #{id}
     </select>
+
+    <select id="getOptionalByOptionalId" parameterType="Integer" resultType="com.ljzzkkkss.lottery.admin.model.Optional">
+        SELECT `id`,`name`,`optionDate`,`cost`,`times`,`game`,`noteNumber` FROM `optional`
+        WHERE `id` = #{id}
+    </select>
 </mapper>

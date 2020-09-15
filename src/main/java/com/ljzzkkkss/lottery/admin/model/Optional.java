@@ -8,6 +8,7 @@ public class Optional implements Serializable {
     private Integer id;
     private Integer userId;
     private String lotteryImg;
+    private String lotteryImg2;
     private Integer status;
     private String name;
     private String cost;
@@ -94,5 +95,13 @@ public class Optional implements Serializable {
 
     public void setNoteNumber(Integer noteNumber) {
         this.noteNumber = noteNumber;
+    }
+
+    public String getLotteryImg2() {
+        return lotteryImg2;
+    }
+
+    public void setLotteryImg2(String lotteryImg2) {
+        this.lotteryImg2 = lotteryImg2;
     }
 }
