@@ -13,7 +13,6 @@
 
     <select id="countLogByContentAndDay" resultType="Integer">
         SELECT COUNT(DISTINCT `phone`)
-        FROM `log` WHERE `content` = #{content} AND DATE(`logTime`) = #{day}
-        ORDER BY `logTime` DESC LIMIT #{start},#{pageSize};
+        FROM `log` WHERE `content` = #{content} AND DATE(`logTime`) = #{day};
     </select>
 </mapper>

@@ -23,4 +23,10 @@ public class NoteController {
     public ReturnBody list(Integer pageIndex, Integer pageSize){
         return new ReturnBody(noteService.getNoteList(pageIndex,pageSize));
     }
+
+    @ResponseBody
+    @GetMapping("/note/optionalDetail")
+    public ReturnBody optionalDetail(Integer optionalId){
+        return new ReturnBody(noteService.getOptionalDetailByOptionalId(optionalId));
+    }
 }

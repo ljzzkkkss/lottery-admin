@@ -4,4 +4,6 @@ import java.util.Map;
 
 public interface NoteService {
     Map<String,Object> getNoteList(Integer pageIndex, Integer pageSize);
+    Map<String,Object> getOptionalDetailByOptionalId(Integer optionalId);
+
 }

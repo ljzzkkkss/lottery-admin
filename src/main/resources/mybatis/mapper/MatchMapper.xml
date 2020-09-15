@@ -10,4 +10,10 @@
     <select id="countMatch" resultType="Integer">
         SELECT COUNT(*)  FROM `match`;
     </select>
+
+
+    <select id="getMatchById" parameterType="Long" resultType="com.ljzzkkkss.lottery.admin.model.Match">
+        SELECT `id`,`mainTeam`,`clientTeam`,`halfScore`,`totalScore`,`match`,`round`,`matchTime`,`status` FROM `match`
+        WHERE `id` = #{id};
+    </select>
 </mapper>

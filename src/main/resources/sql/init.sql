@@ -90,7 +90,7 @@ CREATE TABLE `optional` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='自选方案表';
 
 CREATE TABLE `optional_detail` (
-  `id` int(11) NOT NULL COMMENT '方案详情id',
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '方案详情id',
   `matchId` bigint(20) NOT NULL COMMENT '赛事id',
   `optionalId` int(11) DEFAULT NULL COMMENT '方案id',
   `category` varchar(45) DEFAULT NULL COMMENT '分类（非让球，主-1，比分 等）',
