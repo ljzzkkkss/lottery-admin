@@ -2,6 +2,7 @@ package com.ljzzkkkss.lottery.admin.controller;
 
 import com.ljzzkkkss.lottery.admin.constants.ReturnType;
 import com.ljzzkkkss.lottery.admin.model.Article;
+import com.ljzzkkkss.lottery.admin.model.RecommendParam;
 import com.ljzzkkkss.lottery.admin.model.ReturnBody;
 import com.ljzzkkkss.lottery.admin.service.ArticleService;
 import org.springframework.stereotype.Controller;
@@ -36,6 +37,7 @@ public class ArticleController {
     @ResponseBody
     @PostMapping("/article/insert")
     public ReturnBody insert(Article article){
+        article.setHasRecommend(0);
         articleService.insertArticle(article);
         return ReturnType.SUCCESS;
     }
@@ -47,11 +49,23 @@ public class ArticleController {
         return ReturnType.SUCCESS;
     }
 
-
     @ResponseBody
     @PostMapping("/article/delete")
     public ReturnBody delete(Integer id){
         articleService.deleteArticleById(id);
+        return ReturnType.SUCCESS;
+    }
+
+    @ResponseBody
+    @GetMapping("/article/getMatchNotStartList")
+    public ReturnBody getMatchNotStartList(Integer articleId){
+        return new ReturnBody(articleService.getMatchNotStartList(articleId));
+    }
+
+    @ResponseBody
+    @PostMapping("/article/insertRecommend")
+    public ReturnBody insertRecommend(RecommendParam recommendParam){
+        articleService.insertRecommend(recommendParam);
         return ReturnType.SUCCESS;
     }
 }

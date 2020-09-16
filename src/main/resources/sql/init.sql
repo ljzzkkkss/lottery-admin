@@ -66,7 +66,7 @@ CREATE TABLE `note` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='留言表';
 
 CREATE TABLE `odd` (
-  `id` bigint(20) NOT NULL COMMENT '赔率id',
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '赔率id',
   `matchId` bigint(20) NOT NULL COMMENT '赛事id',
   `category` varchar(45) DEFAULT NULL COMMENT '分类（非让球，主-1，比分 等）',
   `rate` varchar(45) DEFAULT NULL COMMENT '赔率',

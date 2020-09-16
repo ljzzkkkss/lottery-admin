@@ -12,13 +12,13 @@
     </select>
 
     <select id="getArticleById" resultType="com.ljzzkkkss.lottery.admin.model.Article">
-        SELECT `id`,`title`,`subTitle`,`category`,`content`,`label`,DATE_FORMAT(`date`,'%Y-%m-%d') `date`,`isTop`,`image`,`status` FROM `article`
+        SELECT `id`,`title`,`subTitle`,`category`,`content`,`label`,DATE_FORMAT(`date`,'%Y-%m-%d') `date`,`isTop`,`image`,`status`,`hasRecommend` FROM `article`
         WHERE `id` = #{id}
     </select>
 
     <insert id="insertArticle" parameterType="com.ljzzkkkss.lottery.admin.model.Article">
-        INSERT INTO `article`(`title`,`subTitle`,`category`,`content`,`label`,`date`,`isTop`,`image`,`status`)
-        VALUES(#{title},#{subTitle},#{category},#{content},#{label},#{date},#{isTop},#{image},#{status})
+        INSERT INTO `article`(`title`,`subTitle`,`category`,`content`,`label`,`date`,`isTop`,`image`,`status`,`hasRecommend`)
+        VALUES(#{title},#{subTitle},#{category},#{content},#{label},#{date},#{isTop},#{image},#{status},#{hasRecommend})
     </insert>
 
     <update id="updateArticleById" parameterType="com.ljzzkkkss.lottery.admin.model.Article">
@@ -33,6 +33,8 @@
             <if test="isTop != null">`isTop` = #{isTop},</if>
             <if test="image != null">`image` = #{image},</if>
             <if test="status != null">`status` = #{status},</if>
+            <if test="hasRecommend != null">`hasRecommend` = #{hasRecommend},</if>
+            <if test="recommendGame != null">`recommendGame` = #{recommendGame},</if>
         </trim>
         WHERE `id` = #{id}
     </update>

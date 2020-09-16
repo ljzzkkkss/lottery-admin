@@ -321,6 +321,47 @@
 </div>
 <!-- /.modal -->
 
+<div class="modal fade" id="odd">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">选择推荐方案</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form role="form" onsubmit="return false;">
+                    <div class="card-body" id="oddDetail">
+                    </div>
+                </form>
+                <form role="form" onsubmit="return false;">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="id">文章id</label>
+                            <input type="text" class="form-control" id="articleId" disabled>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="category">玩法</label>
+                        <select class="select2bs4" id="recommendGame" style="width: 100%;">
+                            <option value="2串1">2串1</option>
+                            <option value="3串1">3串1</option>
+                            <option value="4串1">4串1</option>
+                        </select>
+                    </div>
+                </form>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary" id="saveRecommendBtn">保存</button>
+                </div>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
 <!-- jQuery -->
 <script src="/templates/plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
@@ -340,6 +381,46 @@
 <!-- page script -->
 <script>
     $(function () {
+        $('#oddDetail').on('click','.odd',function(){
+            $(this).toggleClass("active");
+            let match = [];
+            let isSingle = true;
+            let length = $('#oddDetail .active').length;
+            for(let i = 0; i < length; i++){
+                let $active = $('#oddDetail .active').eq(i);
+                if('0' === $active.attr("data-single")){
+                    isSingle = false;
+                }
+                if(!match.includes($active.attr("data-matchId"))){
+                    match.push($active.attr("data-matchId"));
+                }
+            }
+            let data = [];
+            if(isSingle){
+                data.push({
+                    id:'单关',
+                    text:'单关'
+                })
+            }
+            for(let i = 1; i < match.length;i++){
+                data.push({
+                    id: (i + 1) + '串1',
+                    text: (i + 1) + '串1'
+                })
+            }
+            if($('#recommendGame').data('select2')){
+                $('#recommendGame').select2('destroy').empty();
+            }
+            $('#recommendGame').select2({
+                placeholder: '选择文章分类',
+                tags: true,
+                multiple: true,
+                height: '40px',
+                allowClear: true,
+                language: "zh-CN",
+                data: data
+            });
+        });
         $('#content').wysiwyg();
 
         $("#date").inputmask({alias: "date"});
@@ -350,7 +431,17 @@
             multiple: false,
             height: '40px',
             allowClear: true,
-            language: "zh-CN",
+            language: "zh-CN"
+        });
+
+        //Initialize Select2 Elements
+        $('#recommendGame').select2({
+            placeholder: '选择文章分类',
+            tags: true,
+            multiple: true,
+            height: '40px',
+            allowClear: true,
+            language: "zh-CN"
         });
 
         $("#jsGrid").jsGrid({
@@ -457,9 +548,60 @@
                                     })
                                 }
                             });
+                        let recommendBtn = $("<input class=\"jsgrid-button jsgrid-insert-button\" type=\"button\" title=\"推荐方案\">").click(function(){
+                            $.ajax({
+                                url: "/article/getMatchNotStartList?articleId=" + item.id,
+                                type: 'GET',
+                                dataType: "json"
+                            }).done(function (response) {
+                                if(response.data){
+                                    let data = response.data;
+                                    $("#oddDetail").html('');
+                                    data.match.forEach(function(match){
+                                        $("#oddDetail").append(`
+                                        <div class="form-group row">
+                                            <label class="col-3">${match.match.match} ${match.match.round}</label>
+                                            <label class="col-5">${match.match.mainTeam}(主) VS ${match.match.clientTeam}(客)</label>
+                                            <label class="col-4">${match.match.matchTime}</label>
+                                        </div>`);
+                                        for(let key in match.oddList){
+                                            let oddList = match.oddList[key];
+                                            let table = $(`
+                                            <div class="form-group row">
+                                                <table class="table table-striped table-bordered">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td colspan="${oddList.length > 9 ? 9 : oddList.length}"><label>${key}</label></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>`);
+                                            let contentTr = $("<tr>");
+                                            let rateTr = $("<tr>");
+                                            oddList.forEach(function(odd,index){
+                                                contentTr.append(`<td><label>${odd.content}<sup style="color:red">${odd.single === 0 ? '' : '单'}</sup></label></td>`);
+                                                rateTr.append(`<td class="odd" data-matchId="${odd.matchId}" data-content="${odd.content}" data-single="${odd.single}" data-category="${odd.category}" data-rate="${odd.rate}"><label>${odd.rate}</label></td>`);
+                                                if((index + 1) % 9 === 0){//一行最多9个，到九个另起一行
+                                                    table.find("tbody").append(contentTr).append(rateTr);
+                                                    contentTr = $("<tr>");
+                                                    rateTr = $("<tr>");
+                                                }
+                                            });
+                                            table.find("tbody").append(contentTr).append(rateTr);
+                                            $("#oddDetail").append(table);
+                                        }
+                                    });
+                                    let recommendGameArr =  data.recommend.recommendGame? data.recommend.recommendGame.split(',') : [];
+                                    $("#articleId").val(item.id);
+                                    $('#recommendGame').val(recommendGameArr).trigger('change');
+                                    $("#odd").modal();
+                                }
+                            });
+                        });
                         return $('<label>')
                             .append(editBtn)
-                            .append(delBtn);
+                            .append(delBtn)
+                            .append(recommendBtn);
                     }
                 },
             ]
@@ -482,6 +624,36 @@
                     isTop: $('#isTop')[0].checked ? 1 : 0,
                     status: $('#status')[0].checked  ? 1 : 2,
                     category: $('#category').val()
+                },
+                dataType: "json",
+                success: (res) => {
+                    if (res.code === '0000') {
+                        window.alert("保存成功！");
+                        $("#edit").modal("hide");
+                        $("#jsGrid").jsGrid("loadData");
+                    } else {
+                        window.alert("保存失败！");
+                        return false;
+                    }
+                },
+                error: (e) => {
+                    console.error(e);
+                    window.alert("保存失败！");
+                }
+            })
+        });
+
+        $('#saveRecommendBtn').on('click', function () {
+            let recommendGame = $('#recommendGame').select2('data').map(d => d.text).join(',');
+            let recommendList = [];
+            $.ajax({
+                url: '/article/insertRecommend',
+                type: 'post',
+                contentType: 'application/x-www-form-urlencoded',
+                data: {
+                    articleId: $('#articleId').val(),
+                    recommendGame:recommendGame,
+                    recommendList:recommendList
                 },
                 dataType: "json",
                 success: (res) => {

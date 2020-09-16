@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ljzzkkkss.lottery.admin.mapper.RecommendMapper" >
+
+    <select id="getRecommendListByArticleId" parameterType="Integer" resultType="com.ljzzkkkss.lottery.admin.model.Recommend">
+        SELECT `id`,`matchId`,`articleId`,`category`,`rate`,`content` FROM `recommend`
+        WHERE `articleId` = #{articleId};
+    </select>
+
+    <insert id="insertRecommend" parameterType="com.ljzzkkkss.lottery.admin.model.Recommend">
+        INSERT INTO `recommend`(`matchId`,`articleId`,`category`,`rate`,`content`) FROM `recommend`
+        VALUES(#{matchId},#{articleId},#{category},#{rate},#{content})
+    </insert>
+
+    <delete id="deleteRecommendByArticleId" parameterType="Long">
+        DELETE FROM `recommend`
+        WHERE `articleId` = #{articleId};
+    </delete>
+</mapper>
