@@ -8,11 +8,11 @@
     </select>
 
     <insert id="insertRecommend" parameterType="com.ljzzkkkss.lottery.admin.model.Recommend">
-        INSERT INTO `recommend`(`matchId`,`articleId`,`category`,`rate`,`content`) FROM `recommend`
+        INSERT INTO `recommend`(`matchId`,`articleId`,`category`,`rate`,`content`)
         VALUES(#{matchId},#{articleId},#{category},#{rate},#{content})
     </insert>
 
-    <delete id="deleteRecommendByArticleId" parameterType="Long">
+    <delete id="deleteRecommendByArticleId" parameterType="Integer">
         DELETE FROM `recommend`
         WHERE `articleId` = #{articleId};
     </delete>

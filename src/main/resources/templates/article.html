@@ -345,9 +345,6 @@
                     <div class="form-group">
                         <label for="category">玩法</label>
                         <select class="select2bs4" id="recommendGame" style="width: 100%;">
-                            <option value="2串1">2串1</option>
-                            <option value="3串1">3串1</option>
-                            <option value="4串1">4串1</option>
                         </select>
                     </div>
                 </form>
@@ -412,7 +409,7 @@
                 $('#recommendGame').select2('destroy').empty();
             }
             $('#recommendGame').select2({
-                placeholder: '选择文章分类',
+                placeholder: '选择玩法',
                 tags: true,
                 multiple: true,
                 height: '40px',
@@ -429,16 +426,6 @@
             placeholder: '选择文章分类',
             tags: true,
             multiple: false,
-            height: '40px',
-            allowClear: true,
-            language: "zh-CN"
-        });
-
-        //Initialize Select2 Elements
-        $('#recommendGame').select2({
-            placeholder: '选择文章分类',
-            tags: true,
-            multiple: true,
             height: '40px',
             allowClear: true,
             language: "zh-CN"
@@ -580,7 +567,7 @@
                                             let rateTr = $("<tr>");
                                             oddList.forEach(function(odd,index){
                                                 contentTr.append(`<td><label>${odd.content}<sup style="color:red">${odd.single === 0 ? '' : '单'}</sup></label></td>`);
-                                                rateTr.append(`<td class="odd" data-matchId="${odd.matchId}" data-content="${odd.content}" data-single="${odd.single}" data-category="${odd.category}" data-rate="${odd.rate}"><label>${odd.rate}</label></td>`);
+                                                rateTr.append(`<td class="odd ${data.recommend[odd.matchId + '-' + odd.content] ? "active" : ""}" data-matchId="${odd.matchId}" data-content="${odd.content}" data-single="${odd.single}" data-category="${odd.category}" data-rate="${odd.rate}"><label>${odd.rate}</label></td>`);
                                                 if((index + 1) % 9 === 0){//一行最多9个，到九个另起一行
                                                     table.find("tbody").append(contentTr).append(rateTr);
                                                     contentTr = $("<tr>");
@@ -590,6 +577,44 @@
                                             table.find("tbody").append(contentTr).append(rateTr);
                                             $("#oddDetail").append(table);
                                         }
+                                    });
+                                    let match = [];
+                                    let isSingle = true;
+                                    let length = $('#oddDetail .active').length;
+                                    for(let i = 0; i < length; i++){
+                                        let $active = $('#oddDetail .active').eq(i);
+                                        if('0' === $active.attr("data-single")){
+                                            isSingle = false;
+                                        }
+                                        if(!match.includes($active.attr("data-matchId"))){
+                                            match.push($active.attr("data-matchId"));
+                                        }
+                                    }
+                                    //初始化下拉框
+                                    let select2data = [];
+                                    if(isSingle){
+                                        select2data.push({
+                                            id:'单关',
+                                            text:'单关'
+                                        })
+                                    }
+                                    for(let i = 1; i < match.length;i++){
+                                        select2data.push({
+                                            id: (i + 1) + '串1',
+                                            text: (i + 1) + '串1'
+                                        })
+                                    }
+                                    if($('#recommendGame').data('select2')){
+                                        $('#recommendGame').select2('destroy').empty();
+                                    }
+                                    $('#recommendGame').select2({
+                                        placeholder: '选择玩法',
+                                        tags: true,
+                                        multiple: true,
+                                        height: '40px',
+                                        allowClear: true,
+                                        language: "zh-CN",
+                                        data: select2data
                                     });
                                     let recommendGameArr =  data.recommend.recommendGame? data.recommend.recommendGame.split(',') : [];
                                     $("#articleId").val(item.id);
@@ -646,6 +671,16 @@
         $('#saveRecommendBtn').on('click', function () {
             let recommendGame = $('#recommendGame').select2('data').map(d => d.text).join(',');
             let recommendList = [];
+            let length = $('#oddDetail .active').length;
+            for(let i = 0; i < length; i++){
+                let $active = $('#oddDetail .active').eq(i);
+                recommendList.push({
+                    matchId: $active.attr("data-matchId"),
+                    category: $active.attr("data-category"),
+                    rate: $active.attr("data-rate"),
+                    content: $active.attr("data-content")
+                })
+            }
             $.ajax({
                 url: '/article/insertRecommend',
                 type: 'post',
@@ -659,7 +694,7 @@
                 success: (res) => {
                     if (res.code === '0000') {
                         window.alert("保存成功！");
-                        $("#edit").modal("hide");
+                        $("#odd").modal("hide");
                         $("#jsGrid").jsGrid("loadData");
                     } else {
                         window.alert("保存失败！");

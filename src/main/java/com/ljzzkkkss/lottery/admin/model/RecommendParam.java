@@ -1,11 +1,12 @@
 package com.ljzzkkkss.lottery.admin.model;
 
 import java.util.List;
+import java.util.Map;
 
 public class RecommendParam {
     private Integer articleId;
     private String recommendGame;
-    private List<Recommend> recommendList;
+    private List<Map<String,Object>> recommendList;
 
     public Integer getArticleId() {
         return articleId;
@@ -23,11 +24,11 @@ public class RecommendParam {
         this.recommendGame = recommendGame;
     }
 
-    public List<Recommend> getRecommendList() {
+    public List<Map<String, Object>> getRecommendList() {
         return recommendList;
     }
 
-    public void setRecommendList(List<Recommend> recommendList) {
+    public void setRecommendList(List<Map<String, Object>> recommendList) {
         this.recommendList = recommendList;
     }
 }

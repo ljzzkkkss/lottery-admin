@@ -101,8 +101,16 @@ public class ArticelServiceImpl implements ArticleService {
         }
         articleMapper.updateArticleById(article);
         recommendMapper.deleteRecommendByArticleId(recommendParam.getArticleId());
-        for(Recommend recommend : recommendParam.getRecommendList()){
-            recommendMapper.insertRecommend(recommend);
+        if(null != recommendParam.getRecommendList() && !recommendParam.getRecommendList().isEmpty()) {
+            for (Map<String, Object> recommendMap : recommendParam.getRecommendList()) {
+                Recommend recommend = new Recommend();
+                recommend.setArticleId(recommendParam.getArticleId());
+                recommend.setMatchId(Long.valueOf((String) recommendMap.get("matchId")));
+                recommend.setCategory((String) recommendMap.get("category"));
+                recommend.setContent((String) recommendMap.get("content"));
+                recommend.setRate((String) recommendMap.get("rate"));
+                recommendMapper.insertRecommend(recommend);
+            }
         }
     }
 }
