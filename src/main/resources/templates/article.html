@@ -358,6 +358,14 @@
     </div>
     <!-- /.modal-dialog -->
 </div>
+<div class="modal fade" id="loading">
+    <div class="modal-dialog modal-lg"></div>
+    <div class="progress" style="width: 200px;height:20px; z-index: 20000; position: absolute; text-align: center; left: 50%; top: 50%;margin-left:-100px;margin-top:-10px">
+        <div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"  style="width: 100%;animation: progress-bar-stripes 2s linear infinite;">
+            正在上传...
+        </div>
+    </div>
+</div>
 <!-- /.modal -->
 <!-- jQuery -->
 <script src="/templates/plugins/jquery/jquery.min.js"></script>
@@ -727,6 +735,7 @@
             }
             var formData = new FormData();
             formData.append("file", file);
+            $('#loading').modal({backdrop: 'static', keyboard: false});
             $.ajax({
                 url: "/file/upload",
                 data: formData,
@@ -736,16 +745,25 @@
                 contentType: false,
                 success: (res) => {
                     if (res.code === '0000') {
-                        window.alert("上传成功！");
+                        setTimeout(function() {
+                            $('#loading').modal('hide');
+                            window.alert("上传成功！");
+                        },500);
                         $('#image').val(res.data);
                     } else {
-                        window.alert("上传失败！");
+                        setTimeout(function() {
+                            $('#loading').modal('hide');
+                            window.alert("上传失败！");
+                        },500);
                         return false;
                     }
                 },
                 error: (e) => {
+                    setTimeout(function() {
+                        $('#loading').modal('hide');
+                        window.alert("上传失败！");
+                    },500);
                     console.error(e);
-                    window.alert("上传失败！");
                 }
             });
         })
