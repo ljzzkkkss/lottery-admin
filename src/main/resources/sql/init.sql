@@ -50,6 +50,7 @@ CREATE TABLE `match` (
   `match` varchar(45) DEFAULT NULL COMMENT '所属联赛',
   `round` varchar(45) DEFAULT NULL COMMENT '场次',
   `matchTime` datetime DEFAULT NULL COMMENT '比赛时间',
+  `endTime` datetime DEFAULT NULL COMMENT '投注截至时间',
   `status` varchar(45) DEFAULT NULL COMMENT '比赛状态',
   PRIMARY KEY (`id`),
   KEY `INDEX_TEAM` (`mainTeam`,`clientTeam`,`matchTime`) /*!80000 INVISIBLE */,

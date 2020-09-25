@@ -19,8 +19,8 @@ public class TaskServiceImpl implements TaskService {
     private OddMapper oddMapper;
 
     @Override
-    public Match getMatchBuMatchTimeAndRound(String matchTime, String round) {
-        return matchMapper.getMatchByMatchTimeAndRound(matchTime,round);
+    public Match getMatchByEndDayAndRound(String day, String round) {
+        return matchMapper.getMatchByEndDayAndRound(day,round);
     }
 
     @Override
@@ -31,7 +31,7 @@ public class TaskServiceImpl implements TaskService {
     @Override
     @Transactional
     public void upsertOddList(Match match, List<Odd> oddList) {
-        Match existsMatch =  matchMapper.getMatchByMatchTimeAndRound(match.getMatchTime(),match.getRound());
+        Match existsMatch =  matchMapper.getMatchByEndDayAndRound(match.getEndTime().substring(0,10),match.getRound());
         if(null == existsMatch) {
             matchMapper.insertMatch(match);
         }else {

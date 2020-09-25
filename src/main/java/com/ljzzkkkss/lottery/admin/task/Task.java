@@ -53,7 +53,7 @@ public class Task {
                         match.setMainTeam(matchJSON.getString("homesxname"));
                         match.setClientTeam(matchJSON.getString("awaysxname"));
                         match.setRound(matchJSON.getString("matchnum"));
-                        match.setMatchTime(matchJSON.getString("endtime"));
+                        match.setEndTime(matchJSON.getString("endtime"));
                         match.setMatch(matchJSON.getString("simpleleague"));
                         match.setStatus("未开始");
                         List<Odd> oddList = new ArrayList<>();
@@ -243,7 +243,7 @@ public class Task {
                                     break;
                             }
                         }
-                        if(null == taskService.getMatchBuMatchTimeAndRound(match.getMatchTime(),match.getRound()) || ( new Date().getTime()) - updateTime.getTime() < 120000){//两分钟内赔率有更新
+                        if(null == taskService.getMatchByEndDayAndRound(match.getMatchTime(),match.getRound()) || ( new Date().getTime()) - updateTime.getTime() < 120000){//两分钟内赔率有更新
                             taskService.upsertOddList(match,oddList);
                         }
                     }catch(Exception e){
@@ -256,6 +256,7 @@ public class Task {
     }
 
     @Scheduled(cron = "0 0/1 * * * ?")
+//    @Scheduled(cron = "*/1 * * * * ?")
     public void getMatchScore(){
         log.info("getMatchScore start");
         SimpleDateFormat formatForMonth = new SimpleDateFormat("yyyyMM");
@@ -267,11 +268,25 @@ public class Task {
         JSONArray matchList = JSONObject.parseObject(matchData).getJSONObject("data").getJSONArray("matches");
         for(int i = 0; i < matchList.size(); i++){
             JSONObject matchJSON = matchList.getJSONObject(i);
-            Match match = taskService.getMatchBuMatchTimeAndRound(matchJSON.getString(""),matchJSON.getString("order"));
-            if(null != match && !"未开始".equals(matchJSON.getString("status_desc"))){
+            Match match = taskService.getMatchByEndDayAndRound(matchJSON.getString("ownerdate"),matchJSON.getString("order"));
+            if(null != match){
                 match.setStatus(matchJSON.getString("status_desc"));
                 match.setHalfScore(matchJSON.getString("homehalfscore") + " - " + matchJSON.getString("awayhalfscore"));
                 match.setTotalScore(matchJSON.getString("homescore") + " - " + matchJSON.getString("awayscore"));
+                match.setMatchTime(matchJSON.getString("matchtime"));
+                taskService.updateMatch(match);
+            }
+        }
+        matchData = restTemplate.getForEntity("https://ews.500.com/static/ews/jczq/" + formatForMonth.format(new Date()) + "/" + formatForDay.format(new Date()) + ".json",String.class).getBody();
+        matchList = JSONObject.parseObject(matchData).getJSONObject("data").getJSONArray("matches");
+        for(int i = 0; i < matchList.size(); i++){
+            JSONObject matchJSON = matchList.getJSONObject(i);
+            Match match = taskService.getMatchByEndDayAndRound(matchJSON.getString("ownerdate"),matchJSON.getString("order"));
+            if(null != match){
+                match.setStatus(matchJSON.getString("status_desc"));
+                match.setHalfScore(matchJSON.getString("homehalfscore") + " - " + matchJSON.getString("awayhalfscore"));
+                match.setTotalScore(matchJSON.getString("homescore") + " - " + matchJSON.getString("awayscore"));
+                match.setMatchTime(matchJSON.getString("matchtime"));
                 taskService.updateMatch(match);
             }
         }

@@ -14,6 +14,7 @@ public class Match implements Serializable {
     private String round;
     private String matchTime;
     private String status;
+    private String endTime;
 
     public Long getId() {
         return id;
@@ -85,5 +86,13 @@ public class Match implements Serializable {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
     }
 }

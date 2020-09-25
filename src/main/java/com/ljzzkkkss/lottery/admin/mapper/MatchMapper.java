@@ -10,7 +10,7 @@ public interface MatchMapper {
     List<Match> getMatchListNotStart();
     Integer countMatch();
     Match getMatchById(@Param("id")Long id);
-    Match getMatchByMatchTimeAndRound(@Param("matchTime")String matchTime,@Param("round")String round);
+    Match getMatchByEndDayAndRound(@Param("day")String day,@Param("round")String round);
     void updateMatch(Match match);
     void insertMatch(Match match);
 }
