@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface OddMapper {
     List<Odd> getOddListByMatchId(@Param("matchId")Long matchId);
+    void insertOdd(Odd odd);
+    void deleteOddByMatchId(@Param("matchId")Long matchId);
 }

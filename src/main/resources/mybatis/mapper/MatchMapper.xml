@@ -13,14 +13,32 @@
         ORDER BY `matchTime` DESC;
     </select>
 
-
     <select id="countMatch" resultType="Integer">
         SELECT COUNT(*)  FROM `match`;
     </select>
-
 
     <select id="getMatchById" parameterType="Long" resultType="com.ljzzkkkss.lottery.admin.model.Match">
         SELECT `id`,`mainTeam`,`clientTeam`,`halfScore`,`totalScore`,`match`,`round`,`matchTime`,`status` FROM `match`
         WHERE `id` = #{id};
     </select>
+
+    <select id="getMatchByMatchTimeAndRound" resultType="com.ljzzkkkss.lottery.admin.model.Match">
+        SELECT `id`,`mainTeam`,`clientTeam`,`halfScore`,`totalScore`,`match`,`round`,`matchTime`,`status` FROM `match`
+        WHERE `matchTime` = #{matchTime} AND `round` = #{round};
+    </select>
+
+    <update id="updateMatch" parameterType="com.ljzzkkkss.lottery.admin.model.Match">
+        UPDATE `match`
+        <trim prefix="set" suffixOverrides="," >
+            <if test="halfScore != null">`halfScore` = #{halfScore},</if>
+            <if test="totalScore != null">`totalScore` = #{totalScore},</if>
+            <if test="status != null">`status` = #{status},</if>
+        </trim>
+        WHERE `id` = #{id}
+    </update>
+
+    <insert id="insertMatch" useGeneratedKeys="true" keyProperty="id" parameterType="com.ljzzkkkss.lottery.admin.model.Match">
+        INSERT INTO `match`(`mainTeam`,`clientTeam`,`halfScore`,`totalScore`,`match`,`round`,`matchTime`,`status`)
+        VALUES (#{mainTeam},#{clientTeam},#{halfScore},#{totalScore},#{match},#{round},#{matchTime},#{status})
+    </insert>
 </mapper>

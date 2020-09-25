@@ -6,4 +6,13 @@
         SELECT `id`,`matchId`,`category`,`rate`,`content`,`single` FROM `odd`
         WHERE `matchId` = #{matchId};
     </select>
+
+    <insert id="insertOdd" parameterType="com.ljzzkkkss.lottery.admin.model.Odd">
+        INSERT INTO `odd`(`matchId`,`category`,`rate`,`content`,`single`)
+        VALUES (#{matchId},#{category},#{rate},#{content},#{single});
+    </insert>
+
+    <delete id="deleteOddByMatchId" parameterType="Long">
+        DELETE FROM `odd` WHERE `matchId` = #{matchId};
+    </delete>
 </mapper>
