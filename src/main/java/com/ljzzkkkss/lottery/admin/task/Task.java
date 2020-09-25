@@ -54,6 +54,7 @@ public class Task {
                         match.setClientTeam(matchJSON.getString("awaysxname"));
                         match.setRound(matchJSON.getString("matchnum"));
                         match.setEndTime(matchJSON.getString("endtime"));
+                        match.setOwnerDate(matchJSON.getString("matchdate"));
                         match.setMatch(matchJSON.getString("simpleleague"));
                         match.setStatus("未开始");
                         List<Odd> oddList = new ArrayList<>();

@@ -3,12 +3,12 @@
 <mapper namespace="com.ljzzkkkss.lottery.admin.mapper.MatchMapper" >
 
     <select id="getMatchListByPage" resultType="com.ljzzkkkss.lottery.admin.model.Match">
-        SELECT `id`,`mainTeam`,`clientTeam`,`halfScore`,`totalScore`,`match`,`round`,`matchTime`,`endTime`,`status`
+        SELECT `id`,`mainTeam`,`clientTeam`,`halfScore`,`totalScore`,`match`,`round`,`matchTime`,`endTime`,`ownerDate`,`status`
         FROM `match` ORDER BY `matchTime` DESC LIMIT #{start},#{pageSize};
     </select>
 
     <select id="getMatchListNotStart" resultType="com.ljzzkkkss.lottery.admin.model.Match">
-        SELECT `id`,`mainTeam`,`clientTeam`,`match`,`round`,`matchTime`,`endTime`,`status`
+        SELECT `id`,`mainTeam`,`clientTeam`,`match`,`round`,`matchTime`,`endTime`,`ownerDate`,`status`
         FROM `match` WHERE `endTime` &gt; NOW()
         ORDER BY `matchTime` DESC;
     </select>
@@ -18,13 +18,13 @@
     </select>
 
     <select id="getMatchById" parameterType="Long" resultType="com.ljzzkkkss.lottery.admin.model.Match">
-        SELECT `id`,`mainTeam`,`clientTeam`,`halfScore`,`totalScore`,`match`,`round`,`matchTime`,`endTime`,`status` FROM `match`
+        SELECT `id`,`mainTeam`,`clientTeam`,`halfScore`,`totalScore`,`match`,`round`,`matchTime`,`endTime`,`ownerDate`,`status` FROM `match`
         WHERE `id` = #{id};
     </select>
 
     <select id="getMatchByEndDayAndRound" resultType="com.ljzzkkkss.lottery.admin.model.Match">
-        SELECT `id`,`mainTeam`,`clientTeam`,`halfScore`,`totalScore`,`match`,`round`,`matchTime`,`endTime`,`status` FROM `match`
-        WHERE DATE(`endTIme`) = #{day} AND `round` = #{round};
+        SELECT `id`,`mainTeam`,`clientTeam`,`halfScore`,`totalScore`,`match`,`round`,`matchTime`,`endTime`,`ownerDate`,`status` FROM `match`
+        WHERE `ownerDate` = #{day} AND `round` = #{round};
     </select>
 
     <update id="updateMatch" parameterType="com.ljzzkkkss.lottery.admin.model.Match">
@@ -39,7 +39,7 @@
     </update>
 
     <insert id="insertMatch" useGeneratedKeys="true" keyProperty="id" parameterType="com.ljzzkkkss.lottery.admin.model.Match">
-        INSERT INTO `match`(`mainTeam`,`clientTeam`,`halfScore`,`totalScore`,`match`,`round`,`matchTime`,`endTime`,`status`)
-        VALUES (#{mainTeam},#{clientTeam},#{halfScore},#{totalScore},#{match},#{round},#{matchTime},{endTime},#{status})
+        INSERT INTO `match`(`mainTeam`,`clientTeam`,`halfScore`,`totalScore`,`match`,`round`,`matchTime`,`endTime`,`ownerDate`,`status`)
+        VALUES (#{mainTeam},#{clientTeam},#{halfScore},#{totalScore},#{match},#{round},#{matchTime},{endTime},{ownerDate},#{status})
     </insert>
 </mapper>
