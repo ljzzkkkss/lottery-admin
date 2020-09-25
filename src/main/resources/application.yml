@@ -31,7 +31,7 @@ spring:
           slow-sql-millis: 2000
   redis:
     database: 0
-    host: localhost
+    host: 127.0.0.1
     port: 6379
     password: 1q2w3e4r!@
     lettuce:
@@ -58,4 +58,4 @@ spring:
     default-property-inclusion: non_null
 file:
   path: /static/
-  url: http://static.xxx.top
+  url: http://81.68.68.253
