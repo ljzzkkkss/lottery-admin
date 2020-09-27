@@ -19,8 +19,9 @@ CREATE TABLE `article` (
   `recommendGame` varchar(255) DEFAULT NULL COMMENT '推荐玩法',
   `hasRecommend` tinyint(4) DEFAULT NULL COMMENT '是否有推荐玩法0 否，1 是',
   PRIMARY KEY (`id`),
-  KEY `INDEX_STATUS_DATE` (`status`,`date`)
+  KEY `INDEX_STATUS_DATE` (`status`,`isTop`,`date`)
 ) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8 COMMENT='文章表';
+
 
 CREATE TABLE `banner` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'banner id',
