@@ -31,7 +31,7 @@ public class TaskServiceImpl implements TaskService {
     @Override
     @Transactional
     public void upsertOddList(Match match, List<Odd> oddList) {
-        Match existsMatch =  matchMapper.getMatchByEndDayAndRound(match.getEndTime().substring(0,10),match.getRound());
+        Match existsMatch =  matchMapper.getMatchByEndDayAndRound(match.getOwnerDate(),match.getRound());
         if(null == existsMatch) {
             matchMapper.insertMatch(match);
         }else {

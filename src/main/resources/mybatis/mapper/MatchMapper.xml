@@ -40,6 +40,6 @@
 
     <insert id="insertMatch" useGeneratedKeys="true" keyProperty="id" parameterType="com.ljzzkkkss.lottery.admin.model.Match">
         INSERT INTO `match`(`mainTeam`,`clientTeam`,`halfScore`,`totalScore`,`match`,`round`,`matchTime`,`endTime`,`ownerDate`,`status`)
-        VALUES (#{mainTeam},#{clientTeam},#{halfScore},#{totalScore},#{match},#{round},#{matchTime},{endTime},{ownerDate},#{status})
+        VALUES (#{mainTeam},#{clientTeam},#{halfScore},#{totalScore},#{match},#{round},#{matchTime},#{endTime},#{ownerDate},#{status})
     </insert>
 </mapper>

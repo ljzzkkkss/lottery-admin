@@ -138,10 +138,10 @@ public class Task {
                                     }
                                     break;
                                 default:
-                                    if(oddKey.startsWith("b")){
+                                    if(oddKey.startsWith("b") && oddKey.length() == 3){
                                         odd.setContent(oddKey.charAt(2) + ":" + oddKey.charAt(1));
                                         oddList.add(odd);
-                                    }else if(oddKey.startsWith("a") || oddKey.startsWith("c")){
+                                    }else if((oddKey.startsWith("a") || oddKey.startsWith("c")) && oddKey.length() == 3){
                                         odd.setContent(oddKey.charAt(1) + ":" + oddKey.charAt(2));
                                         oddList.add(odd);
                                     }
@@ -244,7 +244,7 @@ public class Task {
                                     break;
                             }
                         }
-                        if(null == taskService.getMatchByEndDayAndRound(match.getMatchTime(),match.getRound()) || ( new Date().getTime()) - updateTime.getTime() < 120000){//两分钟内赔率有更新
+                        if(null == taskService.getMatchByEndDayAndRound(match.getOwnerDate(),match.getRound()) || ( new Date().getTime()) - updateTime.getTime() < 120000){//两分钟内赔率有更新
                             taskService.upsertOddList(match,oddList);
                         }
                     }catch(Exception e){
