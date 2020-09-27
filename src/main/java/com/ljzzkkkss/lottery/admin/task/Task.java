@@ -272,8 +272,13 @@ public class Task {
             Match match = taskService.getMatchByEndDayAndRound(matchJSON.getString("ownerdate"),matchJSON.getString("order"));
             if(null != match){
                 match.setStatus(matchJSON.getString("status_desc"));
-                match.setHalfScore(matchJSON.getString("homehalfscore") + " - " + matchJSON.getString("awayhalfscore"));
-                match.setTotalScore(matchJSON.getString("homescore") + " - " + matchJSON.getString("awayscore"));
+                if("未开始".equals(matchJSON.getString("status_desc"))){
+                    match.setHalfScore(" - ");
+                    match.setTotalScore(" - ");
+                }else {
+                    match.setHalfScore(matchJSON.getString("homehalfscore") + " - " + matchJSON.getString("awayhalfscore"));
+                    match.setTotalScore(matchJSON.getString("homescore") + " - " + matchJSON.getString("awayscore"));
+                }
                 match.setMatchTime(matchJSON.getString("matchtime"));
                 taskService.updateMatch(match);
             }
@@ -285,8 +290,13 @@ public class Task {
             Match match = taskService.getMatchByEndDayAndRound(matchJSON.getString("ownerdate"),matchJSON.getString("order"));
             if(null != match){
                 match.setStatus(matchJSON.getString("status_desc"));
-                match.setHalfScore(matchJSON.getString("homehalfscore") + " - " + matchJSON.getString("awayhalfscore"));
-                match.setTotalScore(matchJSON.getString("homescore") + " - " + matchJSON.getString("awayscore"));
+                if("未开始".equals(matchJSON.getString("status_desc"))){
+                    match.setHalfScore(" - ");
+                    match.setTotalScore(" - ");
+                }else {
+                    match.setHalfScore(matchJSON.getString("homehalfscore") + " - " + matchJSON.getString("awayhalfscore"));
+                    match.setTotalScore(matchJSON.getString("homescore") + " - " + matchJSON.getString("awayscore"));
+                }
                 match.setMatchTime(matchJSON.getString("matchtime"));
                 taskService.updateMatch(match);
             }
